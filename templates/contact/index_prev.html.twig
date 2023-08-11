@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact
+{% endblock %}
+
+{% block body %}
+	{# {{ dump(app.user) }} #}
+
+	{# <div class="container">
+	    {{ form(form) }}
+	</div> #}
+
+	{{ form_start(form) }}
+
+	<div id="form_contact">
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success mt-4">
+            {{ message }}
+        </div>
+    {% endfor %}
+    
+		<div class="row">
+			<div class="col-lg-6 col-12">{{ form_row(form.prenom) }}</div>
+			<div class="col-lg-6 col-12">{{ form_row(form.nom) }}</div>
+		</div>
+
+		<div class="row">
+			<div class="col-12">
+				{#
+				* *Version Alban
+				{{ form_label(form.adresse_mail)}}
+				<input
+					name="{{ field_name(form.adresse_mail) }}"
+					{% if app.user %}
+						value="{{ field_value(form.adresse_mail) }}"
+					{% endif %}
+					placeholder="{{ field_label(form.adresse_mail) }}"
+					class="form-control"
+				/>
+				#}
+
+				{# * *Version Ourtof #}
+				{{ form_row(form.adresse_mail) }}
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-12">{{ form_row(form.objet) }}</div>
+		</div>
+
+		<div class="row">
+			<div class="col-12">{{ form_row(form.contenu_message) }}</div>
+		</div>
+
+        <div class="row">
+			<div class="col-12 d-flex justify-content-center">{{ form_row(form.submit) }}</div>
+		</div>
+
+	</div>
+
+	{{ form_rest(form) }}
+
+
+{% endblock %}

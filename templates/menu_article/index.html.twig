@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Menu{% endblock %}
+
+{% block body %}
+
+{# Barre de recherche #}
+<div class="d-flex justify-content-center">
+    <div class="input-group rounded pt-5 w-50">
+    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+    <span class="input-group-text border-0" id="search-addon">
+        <i class="bi bi-search"></i>
+    </span>
+    </div>
+</div>
+
+<form>
+    <label for="choose-tag">tag</label>
+    <select name="choose-tag" id="choose-tag">
+        {% for tag in tagArray %}
+            <option value="{{ tag.nom }}">{{ tag.nom }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Rechercher</button>
+</form>
+
+<div id="result"></div>
+
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        const getArticleByTagUrl = "{{ path('menu-article-get-article-ajax') }}";
+    </script>
+
+    <script src="{{ asset('assets/js/article-search.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ asset('assets/css/contact.css') }}">
+{% endblock %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+
+    {# {{ include('contact/_form.html.twig') }} #}
+    <fieldset>
+            <legend>Envoyer un message</legend>
+            {{ form_start(form, {'attr': {'id': 'new_edit_contact'}}) }}
+
+        <div class="d-flex justify-content-center">
+            <div class="row w-75">
+                    <div class="col-12">
+                            {{ form_label(form.prenom) }}
+                            {{ form_widget(form.prenom) }}
+                            {{ form_errors(form.prenom) }}
+                    </div>
+                    <div class="col-12">
+                            {{ form_label(form.nom) }}
+                            {{ form_widget(form.nom) }}
+                    </div>
+                    <div class="col-12">
+                            {{ form_label(form.adresse_mail) }}
+                            {{ form_widget(form.adresse_mail) }}
+                    </div>
+                    <div class="col-12">
+                            {{ form_label(form.objet) }}
+                            {{ form_widget(form.objet) }}
+                    </div>
+                    <div class="col-12">
+                            {{ form_label(form.contenu_message) }}
+                            {{ form_widget(form.contenu_message) }}
+                    </div>
+                    <div class="col-12 d-flex justify-content-center">
+                            {{ form_label(form.submit) }}
+                            {{ form_widget(form.submit) }}
+                    </div>
+            </div>
+        </div>
+            {{ form_end(form) }}
+    </fieldset>
+{% endblock %}

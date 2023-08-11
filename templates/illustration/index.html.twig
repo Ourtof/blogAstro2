@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Illustration index{% endblock %}
+
+{% block body %}
+    <h1>Illustration index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NomFichier</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for illustration in illustrations %}
+            <tr>
+                <td>{{ illustration.id }}</td>
+                <td>{{ illustration.nomFichier }}</td>
+                <td>
+                    <a href="{{ path('illustration_show', {'id': illustration.id}) }}">show</a>
+                    <a href="{{ path('illustration_edit', {'id': illustration.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('illustration_new') }}">Create new</a>
+{% endblock %}
