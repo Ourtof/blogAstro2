@@ -1,14 +1,14 @@
 fieldset {
-    margin: 0 auto;
+    margin: auto;
     width: 50%;
     padding: 1em;
     border: 1px solid #CCC;
     border-radius: 1em;
 }
 
-legend {
+/* legend {
     width: 75%;
-}
+} */
 
 body {
     margin: 0;

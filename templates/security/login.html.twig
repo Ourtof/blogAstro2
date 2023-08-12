@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ asset('assets/css/contact.css') }}">
+{% endblock %}
+
 {% block title %}Connexion{% endblock %}
 
 {% block body %}
@@ -29,9 +33,11 @@
                                 </button>
                         {% endif %}
                         {# TODO : Lier btn inscription à la page inscription #}
-                        <button class="btn btn-success" type="submit">
-                                Inscription
-                        </button>
+                        <div class="d-flex justify-content-end">
+                                <button class="btn btn-success" type="submit">
+                                        Inscription
+                                </button>
+                        </div>
 
                         <input type="hidden" name="_csrf_token"
                         value="{{ csrf_token('authenticate') }}"

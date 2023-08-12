@@ -17,19 +17,19 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 #[Route('/utilisateur')]
 class UtilisateurController extends AbstractController
 {
-        use GeneralTrait;
+    use GeneralTrait;
 
-        public function __construct(
-                private UtilisateurRepository $utilisateurRepository,
-                private EntityManagerInterface $em
-        ) {
-        }
+    public function __construct(
+        private UtilisateurRepository $utilisateurRepository,
+        private EntityManagerInterface $em
+    ) {
+    }
 
     #[Route('/', name: 'utilisateur_index', methods: ['GET'])]
-    public function index(Session $session): Response
+    public function index(Session $session): RedirectResponse
     {
         //besoin de droits admin
-        $utilisateur = $this->getUtilisateur();
+        $utilisateur = $this->getUser();
 
         $this->adminConnexion($utilisateur, $session);
 
@@ -37,15 +37,14 @@ class UtilisateurController extends AbstractController
     }
 
     #[Route('/new', name: 'utilisateur_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, UtilisateurPasswordHasherInterface $passwordHasher, Session $session, UtilisateurRepository $utilisateur): Response|RedirectResponse
+    public function new(Request $request, UserPasswordHasherInterface $passwordHasher, Session $session, UtilisateurRepository $utilisateur): Response|RedirectResponse
     {
 
         //test de sécurité, un utilisateur connecté ne peut pas s'inscrire
-        $utilisateurInterface = $this->getUtilisateur();
-        if($utilisateurInterface)
-        {
-                $session->set("message", "Vous ne pouvez pas créer un compte lorsque vous êtes connecté");
-                return $this->redirectToRoute('membre');
+        $utilisateurInterface = $this->getUser();
+        if ($utilisateurInterface) {
+            $session->set("message", "Vous ne pouvez pas créer un compte lorsque vous êtes connecté");
+            return $this->redirectToRoute('membre');
         }
 
         $utilisateur = new Utilisateur();
@@ -53,21 +52,22 @@ class UtilisateurController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-                // TODO: Doc Symfo encode password, bug sur $utilisateur
-                // TODO: à faire vérifier
-                $hashedPassword = $passwordHasher->hashPassword(
-                    $utilisateur, 
-                    $utilisateur->getPassword());
-                // $utilisateur->setMotDePasse($passwordHasher->hashPassword($utilisateur, $utilisateur->getMotDePasse()));
-                $this->em->persist($utilisateur);
-                $this->em->flush();
+            // TODO: Doc Symfo encode password, bug sur $utilisateur
+            // TODO: à faire vérifier
+            $hashedPassword = $passwordHasher->hashPassword(
+                $utilisateur,
+                $utilisateur->getPassword()
+            );
+            // $utilisateur->setMotDePasse($passwordHasher->hashPassword($utilisateur, $utilisateur->getMotDePasse()));
+            $this->em->persist($utilisateur);
+            $this->em->flush();
 
-                return $this->redirectToRoute('utilisateur_index');
+            return $this->redirectToRoute('utilisateur_index');
         }
 
         return $this->render('utilisateur/new.html.twig', [
-                'utilisateur' => $utilisateur,
-                'form' => $form->createView(),
+            'utilisateur' => $utilisateur,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -80,49 +80,48 @@ class UtilisateurController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'utilisateur_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Utilisateur $utilisateur, UtilisateurPasswordHasherInterface $passwordHasher, Session $session, $id): Response|RedirectResponse
+    public function edit(Request $request, Utilisateur $utilisateur, UserPasswordHasherInterface $passwordHasher, Session $session, $id): Response|RedirectResponse
     {
-        $utilisateur = $this->utilisateurRepository->find($this->getUtilisateur());
+        $utilisateur = $this->utilisateurRepository->find($this->getUser());
 
-            if($utilisateur->getId() != $id )
-            {
-                    // un utilisateur ne peut pas en modifier un autre
-                    $session->set("message", "Vous ne pouvez pas modifier cet utilisateur");
-                    return $this->redirectToRoute('membre');
-            }
-            $form = $this->createForm(UtilisateurType::class, $utilisateur);
-            $form->handleRequest($request);
+        if ($utilisateur->getId() != $id) {
+            // un utilisateur ne peut pas en modifier un autre
+            $session->set("message", "Vous ne pouvez pas modifier cet utilisateur");
+            return $this->redirectToRoute('membre');
+        }
+        $form = $this->createForm(UtilisateurType::class, $utilisateur);
+        $form->handleRequest($request);
 
-            if ($form->isSubmitted() && $form->isValid()) {
-                $hashedPassword = $passwordHasher->hashPassword(
-                    $utilisateur, 
-                    $utilisateur->getPassword());
-                // $utilisateur->setMotDePasse($passwordHasher->hashPassword($utilisateur, $utilisateur->getMotDePasse()));
-                $this->em->persist($utilisateur);
-                $this->em->flush();
+        if ($form->isSubmitted() && $form->isValid()) {
+            $hashedPassword = $passwordHasher->hashPassword(
+                $utilisateur,
+                $utilisateur->getPassword()
+            );
+            // $utilisateur->setMotDePasse($passwordHasher->hashPassword($utilisateur, $utilisateur->getMotDePasse()));
+            $this->em->persist($utilisateur);
+            $this->em->flush();
 
-                    return $this->redirectToRoute('utilisateur_index');
-            }
+            return $this->redirectToRoute('utilisateur_index');
+        }
 
-            return $this->render('utilisateur/edit.html.twig', [
-                'utilisateur' => $utilisateur,
-                'form' => $form->createView(),
-            ]);
+        return $this->render('utilisateur/edit.html.twig', [
+            'utilisateur' => $utilisateur,
+            'form' => $form->createView(),
+        ]);
     }
 
     #[Route('/{id}', name: 'utilisateur_delete', methods: ['POST'])]
-    public function delete(Request $request, Utilisateur $utilisateur, Session $session, $id): Response|RedirectResponse
+    public function delete(Request $request, Utilisateur $utilisateur, UtilisateurRepository $utilisateurRepository, Session $session, $id): Response|RedirectResponse
     {
-        $utilisateur = $this->getUtilisateur();
-        if($utilisateur->getId() != $id )
-        {
+        $utilisateur = $utilisateurRepository->find($this->getUser());
+
+        if ($utilisateur->getId() != $id) {
             // un utilisateur ne peut pas en supprimer un autre
             $session->set("message", "Vous ne pouvez pas supprimer cet utilisateur");
             return $this->redirectToRoute('membre');
         }
 
-        if ($this->isCsrfTokenValid('delete'.$utilisateur->getId(), $request->request->get('_token')))
-        {
+        if ($this->isCsrfTokenValid('delete' . $utilisateur->getId(), $request->request->get('_token'))) {
             $this->em->remove($utilisateur);
             $this->em->flush();
             // permet de fermer la session utilisateur et d'éviter que l'EntityProvider ne trouve pas la session
@@ -131,5 +130,5 @@ class UtilisateurController extends AbstractController
         }
 
         return $this->redirectToRoute('home');
-}
+    }
 }

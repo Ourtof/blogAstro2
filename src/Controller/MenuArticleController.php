@@ -12,7 +12,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MenuArticleController extends AbstractController
 {
-
     public function __construct(
         private ArticleRepository $articleRepository,
         private TagRepository $tagRepository
