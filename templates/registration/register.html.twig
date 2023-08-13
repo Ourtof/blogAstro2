@@ -4,8 +4,51 @@
 
 {% block body %}
     <h1>Register</h1>
+    <fieldset>
+        <legend>Envoyer un message</legend>
 
-    {{ form_errors(registrationForm) }}
+        {{ form_errors(registrationForm) }}
+        {{ form_start(registrationForm) }}
+
+        <div class="d-flex justify-content-center">
+            <div class="row w-75">
+                <div class="col-12">
+                        {{ form_label(registrationForm.prenom) }}
+                        {{ form_widget(registrationForm.prenom) }}
+                        {{ form_errors(registrationForm.prenom) }}
+                </div>
+                <div class="col-12">
+                        {{ form_label(registrationForm.nom) }}
+                        {{ form_widget(registrationForm.nom) }}
+                </div>
+                {# <div class="col-12">
+                        {{ form_label(registrationForm.adresse_mail) }}
+                        {{ form_widget(registrationForm.adresse_mail) }}
+                </div>
+                <div class="col-12">
+                        {{ form_label(registrationForm.objet) }}
+                        {{ form_widget(registrationForm.objet) }}
+                </div>
+                <div class="col-12">
+                        {{ form_label(registrationForm.contenu_message) }}
+                        {{ form_widget(registrationForm.contenu_message) }}
+                </div>  #}
+                {# <div class="col-12 d-flex justify-content-center">
+                        {{ form_label(registrationForm.submit) }}
+                        {{ form_widget(registrationForm.submit) }}
+                </div> #}
+
+                <div class="col-12 d-flex justify-content-center">
+                            {{ form_label(form.submit) }}
+                            {{ form_widget(form.submit) }}
+                    </div>
+            </div>
+        </div>
+
+        {{ form_end(registrationForm) }}
+    </fieldset>
+
+    {# {{ form_errors(registrationForm) }}
 
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.email) }}
@@ -15,5 +58,5 @@
         {{ form_row(registrationForm.agreeTerms) }}
 
         <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+    {{ form_end(registrationForm) }} #}
 {% endblock %}
