@@ -183,7 +183,7 @@ class RegistrationFormType extends AbstractType
                 'attr' => [
                     'class' => 'form-check-input',
                 ],
-                'label' => 'Termes d\'accords',
+                'label' => 'Termes de confidentialité',
                 'label_attr' => [
                     'class' => 'form-check-label mx-3'
                 ],
