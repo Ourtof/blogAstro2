@@ -154,7 +154,10 @@ class RegistrationFormType extends AbstractType
                     new Assert\NotBlank([
                         'message' => 'Veuillez entrer un email.'
                     ]),
-                    new Assert\Length(['min' => 2, 'max' => 255])
+                    new Assert\Length(['min' => 2, 'max' => 255]),
+                    new Assert\Email([
+                        'message' => 'Cette adresse n\'est pas valide'
+                    ])
                 ]
             ])
             ->add('plainPassword', PasswordType::class, [

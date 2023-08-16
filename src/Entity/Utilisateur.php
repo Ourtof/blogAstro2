@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
@@ -39,16 +40,19 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $codePostal = null;
 
-    #[ORM\Column(length: 100)]
-    private ?string $adresseMail = null;
+    // #[ORM\Column(length: 100)]
+    // private ?string $adresseMail = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $motDePasse = null;
+    // #[ORM\Column(length: 255)]
+    // private ?string $motDePasse = null;
 
-    #[ORM\Column]
-    private ?bool $estAdmin = null;
+    // #[ORM\Column]
+    // private ?bool $estAdmin = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    // #[Assert\Email(
+    //     message: 'Cet email n\'est pas valide',
+    // )]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -149,41 +153,41 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getAdresseMail(): ?string
-    {
-        return $this->adresseMail;
-    }
+    // public function getAdresseMail(): ?string
+    // {
+    //     return $this->adresseMail;
+    // }
 
-    public function setAdresseMail(string $adresseMail): static
-    {
-        $this->adresseMail = $adresseMail;
+    // public function setAdresseMail(string $adresseMail): static
+    // {
+    //     $this->adresseMail = $adresseMail;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getMotDePasse(): ?string
-    {
-        return $this->motDePasse;
-    }
+    // public function getMotDePasse(): ?string
+    // {
+    //     return $this->motDePasse;
+    // }
 
-    public function setMotDePasse(string $motDePasse): static
-    {
-        $this->motDePasse = $motDePasse;
+    // public function setMotDePasse(string $motDePasse): static
+    // {
+    //     $this->motDePasse = $motDePasse;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function isEstAdmin(): ?bool
-    {
-        return $this->estAdmin;
-    }
+    // public function isEstAdmin(): ?bool
+    // {
+    //     return $this->estAdmin;
+    // }
 
-    public function setEstAdmin(bool $estAdmin): static
-    {
-        $this->estAdmin = $estAdmin;
+    // public function setEstAdmin(bool $estAdmin): static
+    // {
+    //     $this->estAdmin = $estAdmin;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getEmail(): ?string
     {

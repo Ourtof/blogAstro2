@@ -32,6 +32,11 @@
                 <div class="col-12">
                         {{ form_label(registrationForm.email) }}
                         {{ form_widget(registrationForm.email) }}
+                        {# TODO Ne fonctionne pas. à corriger #}
+                        {% if registrationForm.email is defined %}
+                                {# {{ registrationForm.email.message }} #}
+                                {{ form_errors(registrationForm.email)}}
+                        {% endif %}
                 </div>
                 <div class="col-12">
                         {{ form_label(registrationForm.plainPassword) }}
