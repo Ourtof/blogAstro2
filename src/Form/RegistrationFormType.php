@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 // use Symfony\Component\Validator\Constraints\IsTrue;
@@ -73,7 +74,7 @@ class RegistrationFormType extends AbstractType
                     new Assert\Length(['min' => 2, 'max' => 50])
                 ]
             ])
-            ->add('dateNaissance', DateType::class, [
+            ->add('dateNaissance', BirthdayType::class, [
                 'attr' => [
                     'class' => 'form-control',
                     'minlength' => '2',

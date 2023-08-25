@@ -24,10 +24,12 @@
                 <div class="col-12">
                         {{ form_label(registrationForm.nom) }}
                         {{ form_widget(registrationForm.nom) }}
+                        {{ form_errors(registrationForm.nom) }}
                 </div>
                 <div class="col-12">
                         {{ form_label(registrationForm.pseudo) }}
                         {{ form_widget(registrationForm.pseudo) }}
+                        {{ form_errors(registrationForm.prenom) }}
                 </div>
                 <div class="col-12">
                         {{ form_label(registrationForm.email) }}
@@ -42,22 +44,27 @@
                 <div class="col-12">
                         {{ form_label(registrationForm.dateNaissance) }}
                         {{ form_widget(registrationForm.dateNaissance) }}
+                        {{ form_errors(registrationForm.dateNaissance) }}
                 </div>
                 <div class="col-12">
                         {{ form_label(registrationForm.adresse) }}
                         {{ form_widget(registrationForm.adresse) }}
+                        {{ form_errors(registrationForm.adresse) }}
                 </div>
                 <div class="col-12">
                         {{ form_label(registrationForm.ville) }}
                         {{ form_widget(registrationForm.ville) }}
+                        {{ form_errors(registrationForm.ville) }}
                 </div>
                 <div class="col-12">
                         {{ form_label(registrationForm.codePostal) }}
                         {{ form_widget(registrationForm.codePostal) }}
+                        {{ form_errors(registrationForm.codePostal)}}
                 </div>
                 <div class="col-12 m-5">
                         {{ form_label(registrationForm.agreeTerms) }}
                         {{ form_widget(registrationForm.agreeTerms) }}
+                        {{ form_errors(registrationForm.agreeTerms) }}
                 </div>
                 <div class="col-12 d-flex justify-content-center">
                         {{ form_label(registrationForm.submit) }}
