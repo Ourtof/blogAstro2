@@ -19,11 +19,11 @@ security:
             form_login:
                 login_path: login
                 check_path: login
-                default_target_path: article_index
+                default_target_path: login
                 use_referer: true
             logout:
                 path: logout
-                target: article_index
+                target: login
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall

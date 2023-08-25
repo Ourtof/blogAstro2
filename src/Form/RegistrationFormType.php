@@ -27,8 +27,8 @@ class RegistrationFormType extends AbstractType
             ->add('pseudo', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'minlenght' => '2',
-                    'maxlenght' => '50',
+                    'minlength' => '2',
+                    'maxlength' => '50',
                 ],
                 'label_attr' => [
                     'class' => 'form-label mt-4'
@@ -43,8 +43,8 @@ class RegistrationFormType extends AbstractType
             ->add('prenom', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'minlenght' => '2',
-                    'maxlenght' => '50'
+                    'minlength' => '2',
+                    'maxlength' => '50'
                 ],
                 'label' => 'Prénom',
                 'label_attr' => [
@@ -60,8 +60,8 @@ class RegistrationFormType extends AbstractType
             ->add('nom', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'minlenght' => '2',
-                    'maxlenght' => '50',
+                    'minlength' => '2',
+                    'maxlength' => '50',
                 ],
                 'label_attr' => [
                     'class' => 'form-label mt-4'
@@ -76,8 +76,8 @@ class RegistrationFormType extends AbstractType
             ->add('dateNaissance', DateType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'minlenght' => '2',
-                    'maxlenght' => '50',
+                    'minlength' => '2',
+                    'maxlength' => '50',
                 ],
                 'label' => 'Date de naissance',
                 'label_attr' => [
@@ -93,8 +93,8 @@ class RegistrationFormType extends AbstractType
             ->add('adresse', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'minlenght' => '2',
-                    'maxlenght' => '255',
+                    'minlength' => '2',
+                    'maxlength' => '255',
                 ],
                 'label_attr' => [
                     'class' => 'form-label mt-4'
@@ -109,8 +109,8 @@ class RegistrationFormType extends AbstractType
             ->add('ville', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'minlenght' => '2',
-                    'maxlenght' => '255',
+                    'minlength' => '2',
+                    'maxlength' => '255',
                 ],
                 'label_attr' => [
                     'class' => 'form-label mt-4'
@@ -125,8 +125,8 @@ class RegistrationFormType extends AbstractType
             ->add('codePostal', NumberType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'minlenght' => '2',
-                    'maxlenght' => '50',
+                    'minlength' => '2',
+                    'maxlength' => '50',
                 ],
                 'label_attr' => [
                     'class' => 'form-label mt-4'
@@ -144,8 +144,8 @@ class RegistrationFormType extends AbstractType
             ->add('email', EmailType::class, [
                 'attr' => [
                     'class' => 'form-control',
-                    'minlenght' => '2',
-                    'maxlenght' => '255',
+                    'minlength' => '2',
+                    'maxlength' => '255',
                 ],
                 'label_attr' => [
                     'class' => 'form-label mt-4'
@@ -165,8 +165,8 @@ class RegistrationFormType extends AbstractType
                 'attr' => [
                     'autocomplete' => 'new-password',
                     'class' => 'form-control',
-                    'minlenght' => '2',
-                    'maxlenght' => '255'
+                    'minlength' => '2',
+                    'maxlength' => '255'
                 ],
                 'label' => 'Mot de passe',
                 'label_attr' => [

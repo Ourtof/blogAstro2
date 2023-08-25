@@ -11,8 +11,8 @@
     <fieldset class="my-5">
         <legend>S'inscrire</legend>
 
-        {{ form_errors(registrationForm) }}
         {{ form_start(registrationForm, {'attr': {'id': 'new_register'}}) }}
+        {{ form_errors(registrationForm) }}
 
         <div class="d-flex justify-content-center">
             <div class="row w-75">
@@ -32,15 +32,12 @@
                 <div class="col-12">
                         {{ form_label(registrationForm.email) }}
                         {{ form_widget(registrationForm.email) }}
-                        {# TODO Ne fonctionne pas. à corriger #}
-                        {% if registrationForm.email is defined %}
-                                {# {{ registrationForm.email.message }} #}
-                                {{ form_errors(registrationForm.email)}}
-                        {% endif %}
+                        {{ form_errors(registrationForm.email)}}
                 </div>
                 <div class="col-12">
                         {{ form_label(registrationForm.plainPassword) }}
                         {{ form_widget(registrationForm.plainPassword) }}
+                        {{ form_errors(registrationForm.plainPassword)}}
                 </div>
                 <div class="col-12">
                         {{ form_label(registrationForm.dateNaissance) }}
