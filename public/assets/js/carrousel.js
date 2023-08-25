@@ -2,7 +2,7 @@
 
 const astro = [1, 2, 3, 4, 5];
 const panneau = document.getElementById('panneau');
-let totalImage = astro.length;
+// let totalImage = astro.length;
 let numImage = 1;
 
 for (let i = 0; i < astro.length; i++) {
