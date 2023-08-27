@@ -5,7 +5,7 @@
 {% block body %}
 
 {# Barre de recherche #}
-<div class="d-flex justify-content-center">
+<div class="d-flex justify-content-center mb-5">
     <div class="input-group rounded pt-5 w-50">
     <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
     <span class="input-group-text border-0" id="search-addon">
@@ -15,13 +15,15 @@
 </div>
 
 <form>
-    <label for="choose-tag">tag</label>
-    <select name="choose-tag" id="choose-tag">
-        {% for tag in tagArray %}
-            <option value="{{ tag.nom }}">{{ tag.nom }}</option>
-        {% endfor %}
-    </select>
-    <button type="submit">Rechercher</button>
+    <div class="d-flex justify-content-center">
+        <label for="choose-tag" class="mx-3">Tag</label>
+        <select name="choose-tag" id="choose-tag" class="form-select w-25">
+            {% for tag in tagArray %}
+                <option value="{{ tag.nom }}">{{ tag.nom }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="btn btn-info mx-5">Rechercher</button>
+    </div>
 </form>
 
 <div id="result"></div>
