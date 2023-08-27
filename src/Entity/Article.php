@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+// use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -34,6 +35,7 @@ class Article
     public function __construct()
     {
         $this->illustrations = new ArrayCollection();
+        $this->dateArticle = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
