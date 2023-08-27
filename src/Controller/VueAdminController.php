@@ -12,34 +12,34 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class VueAdminController extends AbstractController
 {
     use GeneralTrait;
+
+	// TODO : mettre ce fichier dans "admin"
     
     #[Route('/admin/vue/admin', name: 'vue_admin')]
     public function index(): Response
     {
-        return $this->render('admin/vue_admin/index.html.twig', [
-            'controller_name' => 'VueAdminController',
-        ]);
+        return $this->render('admin/vue_admin/index.html.twig');
     }
 
-    /**
-	 * Besoin des droits admin
-	 * @Route("/admin", name="admin")
-	 * @IsGranted("ROLE_ADMIN")
-	*/
+    // /**
+	//  * Besoin des droits admin
+	//  * @Route("/admin", name="admin")
+	//  * @IsGranted("ROLE_ADMIN")
+	// */
 
-	#[Route('/admin', name: 'admin')]
+	// #[Route('/admin', name: 'vue_admin')]
     
-	public function admin(Session $session)
-	{
-		//récupération de l'utilisateur security>Bundle
-		$utilisateur = $this->getUser();
+	// public function admin(Session $session)
+	// {
+	// 	//récupération de l'utilisateur security>Bundle
+	// 	$utilisateur = $this->getUser();
 
-        $this->adminConnexion($utilisateur, $session);
+    //     $this->adminConnexion($utilisateur, $session);
 
-		$session->set("message", "Vous n'avez pas le droit d'acceder à la page admin vous avez été redirigé sur cette page");
+	// 	$session->set("message", "Vous n'avez pas le droit d'acceder à la page admin vous avez été redirigé sur cette page");
 
-		$return = $this->message($session);
+	// 	$return = $this->message($session);
 		
-		return $this->redirectToRoute('home', $return);
-	}
+	// 	return $this->redirectToRoute('home', $return);
+	// }
 }

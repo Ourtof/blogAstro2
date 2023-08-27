@@ -35,7 +35,14 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        # - { path: ^/membre, roles: ROLE_USER }
+    
+    # Hiérarchie et héritage des rôles
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
+
+        # TODO : Si le temps et l'utilité, configurer le role super_admin
+        # ROLE_SUPER_ADMIN: ROLE_ADMIN
 
 when@test:
     security:
