@@ -4,8 +4,8 @@
 
 {% block body %}
 <div class="d-flex flex-column align-items-center mt-5">
-    <button type="button" class="btn btn-primary w-25 mb-5"><a href="{{ path('article_new') }}">Créer Article</button></a>
-    {# <button type="button" class="btn btn-primary w-25 mb-5"><a href="{{ path('article_edit{id}') }}">Modifier Article</button></a> #}
+    <button type="button" class="btn btn-primary w-25 mb-5"><a href="{{ path('article_new') }}">Créer Article</a></button>
+    <button type="button" class="btn btn-primary w-25 mb-5"><a href="{{ path('article_edit', { 'id': 1}) }}">Modifier Article</a></button>
     {# <button type="button" class="btn btn-primary w-25 mb-5"><a href="{{ path('article_delete') }}">Supprimer Article</button></a> #}
 </div>
 {% endblock %}

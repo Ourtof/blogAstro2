@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/article')]
 class ArticleController extends AbstractController
 {
-    #[Route('/', name: 'article_index', methods: ['GET'])]
+    #[Route('/index', name: 'article_index', methods: ['GET'])]
     public function index(ArticleRepository $articleRepository): Response
     {
         return $this->render('article/index.html.twig', [
@@ -68,14 +68,17 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'article_delete', methods: ['POST'])]
-    public function delete(Request $request, Article $article, EntityManagerInterface $entityManager): Response
+    // TODO : le faire fonctionner correctement, le bouton delete doit effacer directement
+    #[Route('/supprimer/{id}', name: 'article_delete', methods: ['GET', 'POST'])]
+    public function delete(Request $request, Article $article, EntityManagerInterface $entityManager, ArticleRepository $articleRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($article);
-            $entityManager->flush();
-        }
+        // if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->request->get('_token'))) {
+        //     $entityManager->remove($article);
+        //     $entityManager->flush();
+        // }
+        $this->articleRepository->remove($article, true);
 
-        return $this->redirectToRoute('article_index', [], Response::HTTP_SEE_OTHER);
+        // return $this->redirectToRoute('article_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('article_index');
     }
 }
