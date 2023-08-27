@@ -12,6 +12,17 @@ trait GeneralTrait
        private UtilisateurRepository $utilisateurRepository 
     ) {
     }
+    public function message(Session $session) {
+        $return = [];
+    
+        if($session->has('message')) {
+            $message = $session->get('message');
+            $session->remove('message'); //on vide la variable message dans la session
+            $return['message'] = $message; //on ajoute à l'array de paramètres notre message
+        }
+
+        return $return;
+    }
  
     public function adminConnexion(UserInterface $utilisateur, Session $session) {
         if(is_null($utilisateur)) {
@@ -24,15 +35,4 @@ trait GeneralTrait
         }
     }
 
-    public function message(Session $session) {
-        $return = [];
-    
-        if($session->has('message')) {
-            $message = $session->get('message');
-            $session->remove('message'); //on vide la variable message dans la session
-            $return['message'] = $message; //on ajoute à l'array de paramètres notre message
-        }
-
-        return $return;
-    }
 }

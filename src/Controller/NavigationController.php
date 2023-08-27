@@ -13,9 +13,7 @@ class NavigationController extends AbstractController
 {
 	use GeneralTrait;
 
-     /**
-	 * @Route("/home", name="home")
-	 */
+	 #[Route('/home', name: 'home')]
 	public function home(Session $session)
 	{
 		// TODO: afficher message session
@@ -36,9 +34,7 @@ class NavigationController extends AbstractController
 	 * fonctionne aussi avec ROLE_USER
 	*/
 
-	/**
-	 * @Route("/membre", name="membre")
-	 */
+	#[Route('/membre', name: 'membre')]
 	public function membre(Session $session)
 	{
 		//test si un utilisateur est connecté
@@ -58,9 +54,7 @@ class NavigationController extends AbstractController
 	 * @IsGranted("ROLE_ADMIN")
 	*/
 
-	/**
-	 * @Route("/admin", name="admin")
-	 */
+	#[Route('/admin', name: 'admin')]
 	public function admin(Session $session)
 	{
 		//récupération de l'utilisateur security>Bundle
