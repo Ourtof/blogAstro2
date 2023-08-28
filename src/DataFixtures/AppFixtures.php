@@ -22,7 +22,7 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 50; $i++) { 
             $article = new Article();
             $article->setTitre($this->faker->word())
-                ->setContenu($this->faker->word());
+                ->setContenu($this->faker->text(500));
 
             $manager->persist($article);
         }
