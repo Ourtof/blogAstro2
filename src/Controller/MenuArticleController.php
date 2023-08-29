@@ -27,7 +27,7 @@ class MenuArticleController extends AbstractController
 
         return $this->render('menu_article/index.html.twig', [
             "tagArray" => $tagArray,
-            "articleArray" => $articleArray
+            "articleArray" => $articleArray 
         ]);
     }
 

@@ -15,12 +15,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/article')]
 class ArticleController extends AbstractController
 {
+
+    public function __construct(
+        private ArticleRepository $articleRepository,
+        // private Article $article
+    ) {
+
+    }
+
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/index', name: 'article_index', methods: ['GET'])]
-    public function index(ArticleRepository $articleRepository): Response
+    public function index(): Response
     {
+        $articleRepository = $this->articleRepository->findAll();
+
         return $this->render('article/index.html.twig', [
-            'articles' => $articleRepository->findAll(),
+            // 'articles' => $articleRepository->findAll(),
+            'articles' => $articleRepository
         ]);
     }
 
@@ -48,6 +59,10 @@ class ArticleController extends AbstractController
     #[Route('/{id}', name: 'article_show', methods: ['GET'])]
     public function show(Article $article): Response
     {
+
+        // TODO : mettre ça dans le construct 
+        // $article = $this->articleRepository;
+
         return $this->render('article/show.html.twig', [
             'article' => $article,
         ]);
