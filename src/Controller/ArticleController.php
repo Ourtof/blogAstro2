@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Form\ArticleType;
+use App\Repository\TagRepository;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,6 +19,7 @@ class ArticleController extends AbstractController
 
     public function __construct(
         private ArticleRepository $articleRepository,
+        private TagRepository $tagRepository,
         // private Article $article
     ) {
 
@@ -40,6 +42,7 @@ class ArticleController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $article = new Article();
+        $tag = $this->tagRepository->findAll();
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
@@ -53,6 +56,7 @@ class ArticleController extends AbstractController
         return $this->render('article/new.html.twig', [
             'article' => $article,
             'form' => $form,
+            'tag' => $tag,
         ]);
     }
 
