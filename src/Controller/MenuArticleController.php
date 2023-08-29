@@ -23,12 +23,12 @@ class MenuArticleController extends AbstractController
     {
         $tagArray = $this->tagRepository->findAll();
 
-        return $this->render('menu_article/index.html.twig', [
-            "tagArray" => $tagArray
-        ]);
-
-        // ! bug à corriger $articleArray ne fonctionne pas
         $articleArray = $this->articleRepository->findAll();
+
+        return $this->render('menu_article/index.html.twig', [
+            "tagArray" => $tagArray,
+            "articleArray" => $articleArray
+        ]);
     }
 
     #[Route('/menu/article/get-article-AJAX', name: 'menu-article-get-article-ajax')]

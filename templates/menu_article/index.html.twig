@@ -28,7 +28,9 @@
 
 <div>
     {% for articles in articleArray %}
-        {{ article.titre }}
+        {{ articles.titre }}
+        {# TODO : pagination ? #}
+        <br>
     {% endfor %}
 </div>
 
