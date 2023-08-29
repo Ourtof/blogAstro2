@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Utilisateur;
+use App\Form\UtilisateurType;
 use App\Controller\Trait\GeneralTrait;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\UtilisateurRepository;

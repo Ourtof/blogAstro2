@@ -20,7 +20,6 @@ class ArticleController extends AbstractController
     public function __construct(
         private ArticleRepository $articleRepository,
         private TagRepository $tagRepository,
-        // private Article $article
     ) {
 
     }
@@ -29,11 +28,8 @@ class ArticleController extends AbstractController
     #[Route('/index', name: 'article_index', methods: ['GET'])]
     public function index(): Response
     {
-        $articleRepository = $this->articleRepository->findAll();
-
         return $this->render('article/index.html.twig', [
-            // 'articles' => $articleRepository->findAll(),
-            'articles' => $articleRepository
+            'articles' => $this->articleRepository->findAll(),
         ]);
     }
 
@@ -63,10 +59,6 @@ class ArticleController extends AbstractController
     #[Route('/{id}', name: 'article_show', methods: ['GET'])]
     public function show(Article $article): Response
     {
-
-        // TODO : mettre ça dans le construct 
-        // $article = $this->articleRepository;
-
         return $this->render('article/show.html.twig', [
             'article' => $article,
         ]);
@@ -94,7 +86,7 @@ class ArticleController extends AbstractController
     // TODO : le faire fonctionner correctement, le bouton delete doit effacer directement
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/supprimer/{id}', name: 'article_delete', methods: ['GET', 'POST'])]
-    public function delete(Request $request, Article $article, EntityManagerInterface $entityManager, ArticleRepository $articleRepository): Response
+    public function delete(Request $request, Article $article, EntityManagerInterface $entityManager): Response
     {
         // if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->request->get('_token'))) {
         //     $entityManager->remove($article);

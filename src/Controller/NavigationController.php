@@ -52,18 +52,27 @@ class NavigationController extends AbstractController
 
     #[IsGranted('ROLE_ADMIN')]
 	#[Route('/admin', name: 'admin')]
-	public function admin(Session $session, Utilisateur $utilisateur)
+	public function admin(Session $session)
 	{
 		//récupération de l'utilisateur security>Bundle
 		$utilisateur = $this->getUser();
 
-        $this->adminConnexion($utilisateur, $session);
+		if (is_null($utilisateur)) {
+            $session->set("message", "Merci de vous connecter");
+            $message = $this->message($session);
+            return $this->redirectToRoute('login', $message);
+        }
+
+        if (in_array('ROLE_ADMIN', $utilisateur->getRoles())) {
+            return $this->render('utilisateur/index.html.twig', [
+                'utilisateurs' => $this->utilisateurRepository->findAll(),
+            ]);
+        }
 
 		$session->set("message", "Vous n'avez pas le droit d'acceder à la page admin vous avez été redirigé sur cette page");
-
-		$return = $this->message($session);
+		$message = $this->message($session);
 		
-		return $this->redirectToRoute('home', $return);
+		return $this->redirectToRoute('home', $message);
 	}
 
 }
