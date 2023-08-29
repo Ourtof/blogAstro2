@@ -6,18 +6,20 @@
     <h1>Article index</h1>
 {# <div class="container-fluid"> #}
     <div class="d-flex justify-content-end">
-        <button type="button" class="btn btn-primary w-25 mb-5"><a href="{{ path('article_new') }}">Créer Article</a></button>
+        <button type="button" class="btn btn-info w-25 m-2"><a href="{{ path('article_new') }}">Créer un article</a></button>
+        <button type="button" class="btn btn-info w-25 m-2"><a href="{{ path('tag_index') }}">Voir tag</a></button>
+        <button type="button" class="btn btn-info w-25 m-2"><a href="{{ path('tag_new') }}">Créer un tag</a></button>
     </div>
     <div class="row">
         <table class="table">
             <thead>
                 <tr>
-                    <th class="col-2">Id</th>
+                    <th class="col-1">Id</th>
                     <th class="col-1">Titre</th>
                     <th class="col-4">Contenu</th>
                     <th class="col-1">Date</th>
                     <th class="col-1">Tag</th>
-                    <th class="col-3">actions</th>
+                    <th class="col-4">actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,6 +47,5 @@
     {# </div> #}
 
     {# <a href="{{ path('article_new') }}">Create new</a> #}
-    {# TODO mettre le bouton en haut à droite #}
     
 {% endblock %}
