@@ -49,9 +49,11 @@
 
 
     {# TODO demander si c'est une bonne idée d'enlever ce bouton pour pas que les membres le voit #}
-    {# <a href="{{ path('article_index') }}">Retour à la liste</a> #}
+    {% if is_granted("ROLE_ADMIN") %}
+        <button class="btn btn-info"><a href="{{ path('article_index') }}">Retour à la liste</a></button>
+        <button class="btn btn-info"><a href="{{ path('article_edit', {'id': article.id}) }}">edit</a></button>
+        {# <button class="btn btn-info">{{ include('article/_delete_form.html.twig') }}</button> #}
+    {% endif %}
 
-    {# <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a> #}
 
-    {# {{ include('article/_delete_form.html.twig') }} #}
 {% endblock %}

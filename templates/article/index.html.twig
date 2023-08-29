@@ -4,12 +4,12 @@
 
 {% block body %}
     <h1>Article index</h1>
-    {# TODO : régler le problème d'espace d'id #}
+{# <div class="container-fluid"> #}
 <div class="row">
     <table class="table">
         <thead>
             <tr>
-                <th class="offset-1 col-1">Id</th>
+                <th class="col-2">Id</th>
                 <th class="col-1">Titre</th>
                 <th class="col-4">Contenu</th>
                 <th class="col-1">Date</th>
@@ -39,7 +39,9 @@
         </tbody>
     </table>
 </div>
+{# </div> #}
 
     {# <a href="{{ path('article_new') }}">Create new</a> #}
+    {# TODO mettre le bouton en haut à droite #}
     <button type="button" class="btn btn-primary w-25 mb-5"><a href="{{ path('article_new') }}">Créer Article</a></button>
 {% endblock %}
