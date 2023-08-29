@@ -52,8 +52,6 @@ class UtilisateurController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // TODO: Doc Symfo encode password, bug sur $utilisateur
-            // TODO: à faire vérifier
             $hashedPassword = $passwordHasher->hashPassword(
                 $utilisateur,
                 $utilisateur->getPassword()
