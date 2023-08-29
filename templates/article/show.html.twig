@@ -1,17 +1,21 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ asset('assets/css/article.css') }}">
+{% endblock %}
+
 {% block title %}Article{% endblock %}
 
 {% block body %}
-    <h1>Article</h1>
+    {# <h1>Article</h1> #}
 
-    <table class="table">
+    {# <table class="table">
         <tbody>
-            <tr>
+            {# <tr>
                 <th>Id</th>
                 <td>{{ article.id }}</td>
-            </tr>
-            <tr>
+            </tr> #}
+            {# <tr>
                 <th>Titre</th>
                 <td>{{ article.titre }}</td>
             </tr>
@@ -28,11 +32,26 @@
                 <td>{{ article.tag ? article.tag|json_encode : '' }}</td>
             </tr>
         </tbody>
-    </table>
+    </table> #}
+    <div class="d-flex justify-content-center mt-5">
+        <h1>
+            {{ article.titre }}
+        </h1>
+    </div>
+    {# TODO : demander si il y a que le moyen css classique pour faire du margin plus grand #}
+        <article class="" id="article">
+            {{ article.contenu }}
+        </article>
+        <div class="m-5 d-flex justify-content-end">
+            {{ article.dateArticle ? article.dateArticle|date('Y-m-d') : '' }}
+        </div>
 
-    <a href="{{ path('article_index') }}">back to list</a>
 
-    <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
 
-    {{ include('article/_delete_form.html.twig') }}
+    {# TODO demander si c'est une bonne idée d'enlever ce bouton pour pas que les membres le voit #}
+    {# <a href="{{ path('article_index') }}">Retour à la liste</a> #}
+
+    {# <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a> #}
+
+    {# {{ include('article/_delete_form.html.twig') }} #}
 {% endblock %}
