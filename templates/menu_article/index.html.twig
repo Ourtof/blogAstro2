@@ -26,6 +26,12 @@
     </div>
 </form>
 
+<div>
+    {% for articles in articleArray %}
+        {{ article.titre }}
+    {% endfor %}
+</div>
+
 <div id="result"></div>
 
 {% endblock %}
