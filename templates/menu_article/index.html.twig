@@ -26,11 +26,16 @@
     </div>
 </form>
 
-<div>
-    {% for articles in articleArray %}
-        {{ articles.titre }}
+<div class="d-flex flex-wrap m-5 justify-content-center">
         {# TODO : pagination ? #}
-        <br>
+    {% for articles in articleArray %}
+        <div class="card m-3" style="width: 15rem;">
+            {# <img class="card-img-top" src="..." alt="Card image cap"> #}
+            <div class="card-body">
+                <h5 class="card-title">{{ articles.titre }}</h5>
+                <a href="{{ path('article_show', { 'id': articles.id }) }}" class="btn btn-primary">Lire</a>
+            </div>
+        </div>
     {% endfor %}
 </div>
 
