@@ -5,31 +5,38 @@
 {% block body %}
     <h1>Tag index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for tag in tags %}
-            <tr>
-                <td>{{ tag.id }}</td>
-                <td>{{ tag.nom }}</td>
-                <td>
-                    <a href="{{ path('tag_show', {'id': tag.id}) }}">show</a>
-                    <a href="{{ path('tag_edit', {'id': tag.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-info w-25 m-2"><a href="{{ path('article_index') }}">Voir article</a></button>
+        <button type="button" class="btn btn-info w-25 m-2"><a href="{{ path('tag_new') }}">Créer un tag</a></button>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="col-2">Id</th>
+                    <th class="col-6">Nom</th>
+                    <th class="col-4">actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for tag in tags %}
+                <tr>
+                    <td>{{ tag.id }}</td>
+                    <td>{{ tag.nom }}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary w-25 mb-5"><a href="{{ path('tag_show', {'id': tag.id}) }}">Voir</a></button>
+                        <button type="button" class="btn btn-primary w-25 mb-5"><a href="{{ path('tag_edit', {'id': tag.id}) }}">Modifier</a></button>
+                        <button type="button" class="btn btn-primary w-25 mb-5"><a href="{{ path('tag_delete', {'id': tag.id}) }}">Effacer</a></button>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Pas de tags trouvés</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
-    <a href="{{ path('tag_new') }}">Create new</a>
+    {# <a href="{{ path('tag_new') }}">Create new</a> #}
 {% endblock %}

@@ -3,7 +3,7 @@
 {% block title %}Tag{% endblock %}
 
 {% block body %}
-    <h1>Tag</h1>
+    {# <h1>Tag</h1>
 
     <table class="table">
         <tbody>
@@ -16,11 +16,22 @@
                 <td>{{ tag.nom }}</td>
             </tr>
         </tbody>
-    </table>
+    </table> #}
 
-    <a href="{{ path('tag_index') }}">back to list</a>
+    <div class="d-flex justify-content-center mt-5">
+        <h1>
+            {{ tag.nom }}
+        </h1>
+    </div>
+    {# TODO : demander si il y a que le moyen css classique pour faire du margin plus grand #}
 
-    <a href="{{ path('tag_edit', {'id': tag.id}) }}">edit</a>
 
-    {{ include('tag/_delete_form.html.twig') }}
+    {# TODO demander si c'est une bonne idée d'enlever ce bouton pour pas que les membres le voit #}
+    {% if is_granted("ROLE_ADMIN") %}
+        <button class="btn btn-info"><a href="{{ path('tag_index') }}">Retour</a></button>
+        <button class="btn btn-info"><a href="{{ path('tag_edit', {'id': tag.id}) }}">Modifier</a></button>
+        {# <button class="btn btn-info">{{ include('article/_delete_form.html.twig') }}</button> #}
+    {% endif %}
+
+    {# {{ include('tag/_delete_form.html.twig') }} #}
 {% endblock %}

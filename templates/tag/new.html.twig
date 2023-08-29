@@ -1,11 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Tag{% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ asset('assets/css/contact.css') }}">
+{% endblock %}
+
+{% block title %}Nouveau Tag{% endblock %}
 
 {% block body %}
-    <h1>Create new Tag</h1>
+    <fieldset class="my-5">
+            <legend>Créer un nouveau tag</legend>
+            {{ form_start(form, {'attr': {'id': 'new_edit_tag'}}) }}
 
-    {{ include('tag/_form.html.twig') }}
+        <div class="d-flex justify-content-center">
+            <div class="row w-75">
+                    <div class="col-12">
+                        {{ form_label(form.nom) }}
+                        {{ form_widget(form.nom) }}
+                        {{ form_errors(form.nom) }}
+                    </div>
+                    <div class="col-12 d-flex justify-content-center">
+                        {{ form_label(form.submit) }}
+                        {{ form_widget(form.submit) }}
+                    </div>
+            </div>
+        </div>
+            {{ form_end(form) }}
+    </fieldset>
 
-    <a href="{{ path('tag_index') }}">back to list</a>
+    {# {{ include('tag/_form.html.twig') }} #}
+
+    <button class="btn btn-info"><a href="{{ path('tag_index') }}">Retour</a></button>
 {% endblock %}
