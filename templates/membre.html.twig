@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+
+    <h1>Mon espace membre</h1>
+
+    <h2>{{ app.user.pseudo }} voici ton espace personnel</h2>
+
+     <a class="btn btn-primary" href="{{ path('utilisateur_edit', {'id': app.user.id}) }}">Modifier mon compte</a>
+
+{% endblock %}

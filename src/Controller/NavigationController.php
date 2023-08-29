@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Utilisateur;
 use App\Controller\Trait\GeneralTrait;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -34,6 +35,7 @@ class NavigationController extends AbstractController
 	 * fonctionne aussi avec ROLE_USER
 	*/
 
+    #[IsGranted('ROLE_USER')]
 	#[Route('/membre', name: 'membre')]
 	public function membre(Session $session)
 	{
@@ -43,19 +45,14 @@ class NavigationController extends AbstractController
 		// TODO: afficher message session
 		$return = $this->message($session);
 			
-		return $this->render('navigation/membre.html.twig', [
+		return $this->render('/membre.html.twig', [
 			'return' => $return
 		]);
 	}
 
-	/**
-	 * Besoin des droits admin
-	 * @Route("/admin", name="admin")
-	 * @IsGranted("ROLE_ADMIN")
-	*/
-
+    #[IsGranted('ROLE_ADMIN')]
 	#[Route('/admin', name: 'admin')]
-	public function admin(Session $session)
+	public function admin(Session $session, Utilisateur $utilisateur)
 	{
 		//récupération de l'utilisateur security>Bundle
 		$utilisateur = $this->getUser();

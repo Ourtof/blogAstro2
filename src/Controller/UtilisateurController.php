@@ -25,7 +25,7 @@ class UtilisateurController extends AbstractController
     ) {
     }
 
-    #[Route('/', name: 'utilisateur_index', methods: ['GET'])]
+    #[Route('/index', name: 'utilisateur_index', methods: ['GET'])]
     public function index(Session $session): RedirectResponse
     {
         //besoin de droits admin
@@ -37,7 +37,7 @@ class UtilisateurController extends AbstractController
     }
 
     #[Route('/new', name: 'utilisateur_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, UserPasswordHasherInterface $passwordHasher, Session $session, UtilisateurRepository $utilisateur): Response|RedirectResponse
+    public function new(Request $request, UserPasswordHasherInterface $passwordHasher, Session $session): Response|RedirectResponse
     {
 
         //test de sécurité, un utilisateur connecté ne peut pas s'inscrire
@@ -78,7 +78,7 @@ class UtilisateurController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'utilisateur_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Utilisateur $utilisateur, UserPasswordHasherInterface $passwordHasher, Session $session, $id): Response|RedirectResponse
+    public function edit(Request $request, UserPasswordHasherInterface $passwordHasher, Session $session, $id): Response|RedirectResponse
     {
         $utilisateur = $this->utilisateurRepository->find($this->getUser());
 
