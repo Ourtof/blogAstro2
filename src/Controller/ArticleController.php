@@ -6,14 +6,16 @@ use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/article')]
 class ArticleController extends AbstractController
 {
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/index', name: 'article_index', methods: ['GET'])]
     public function index(ArticleRepository $articleRepository): Response
     {
@@ -22,6 +24,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/new', name: 'article_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -50,6 +53,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}/edit', name: 'article_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Article $article, EntityManagerInterface $entityManager): Response
     {
@@ -69,6 +73,7 @@ class ArticleController extends AbstractController
     }
 
     // TODO : le faire fonctionner correctement, le bouton delete doit effacer directement
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/supprimer/{id}', name: 'article_delete', methods: ['GET', 'POST'])]
     public function delete(Request $request, Article $article, EntityManagerInterface $entityManager, ArticleRepository $articleRepository): Response
     {
