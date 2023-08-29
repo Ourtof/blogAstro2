@@ -9,18 +9,20 @@
 {% block body %}
         <form method="post" class="mt-5">
                 <fieldset>
-                        <legend>Connectez-vous</legend>
+                        
 
                         {% if error %}
                                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                         {% endif %}
 
                         {% if app.user %}
-                                <div class="mb-3">
+                                <h2 class="mb-3">
                                 {# TODO : bouger le bouton logout de place #}
-                                        Bonjour {{ app.user.pseudo }} <a class="btn btn-sm btn-danger" href="{{ path('logout') }}">Déconnexion</a>
-                                </div>
+                                        Bonjour {{ app.user.pseudo }} 
+                                </h2>
+                                <button class="btn btn-sm btn-danger mt-2"><a href="{{ path('logout') }}">Déconnexion</a></button>
                         {% else %}
+                        <legend>Connectez-vous</legend>
                                 <div class="row">
                                         <div class="col-12 mt-3">
                                                 <input type="text" value="{{ last_username }}" name="_username" id="inputUsername" class="form-control" required autofocus placeholder="pseudo">
@@ -32,14 +34,14 @@
                                 <button class="btn btn-success" type="submit">
                                         Connexion
                                 </button>
+                                <div class="d-flex justify-content-end">
+                                        <button class="btn btn-success" type="">
+                                                <a href="{{ path('inscription') }}">
+                                                Inscription
+                                                </a>
+                                        </button>
+                                </div>
                         {% endif %}
-                        <div class="d-flex justify-content-end">
-                                <button class="btn btn-success" type="">
-                                        <a href="{{ path('inscription') }}">
-                                        Inscription
-                                        </a>
-                                </button>
-                        </div>
 
                         <input type="hidden" name="_csrf_token"
                         value="{{ csrf_token('authenticate') }}"
