@@ -11,7 +11,7 @@
     <fieldset class="my-5">
         <legend>S'inscrire</legend>
 
-        {{ form_start(registrationForm, {'attr': {'id': 'new_register'}}) }}
+        {{ form_start(registrationForm, {'attr': {'id': 'new_inscription'}}) }}
         {{ form_errors(registrationForm) }}
 
         <div class="d-flex justify-content-center">
@@ -85,6 +85,6 @@
         }) }}
         {{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn">Register</button>
+        <button type="submit" class="btn">inscription</button>
     {{ form_end(registrationForm) }} #}
 {% endblock %}
