@@ -74,11 +74,14 @@ class RegistrationFormType extends AbstractType
                     new Assert\Length(['min' => 2, 'max' => 50])
                 ]
             ])
-            ->add('dateNaissance', BirthdayType::class, [
+            // TODO : dynamiser le max pour la date max + constraint
+            ->add('dateNaissance', DateType::class, [
                 'attr' => [
                     'class' => 'form-control',
                     'minlength' => '2',
                     'maxlength' => '50',
+                    'min' => '1900-01-01',
+                    'max' => '2024-01-01',
                 ],
                 'label' => 'Date de naissance',
                 'label_attr' => [

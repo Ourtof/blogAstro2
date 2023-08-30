@@ -25,10 +25,11 @@
                 <div class="col-12">
                     {# {{ tag.nom }} #}
                     {# TODO : faire marcher tag #}
-                    {{ form_label(form.tag) }}
-                    {{ form_widget(form.tag) }}
-                    {% if tag.nom is defined %}
-                    {% endif %}
+                    {# {% if form.tag.nom is defined %} #}
+                        {# {{ form_label(form.tag) }}
+                        {{ form_widget(form.tag) }} #}
+                    {{ form_row(form.tag) }}
+                    {# {% endif %} #}
                 </div>
                 <div class="col-12 d-flex justify-content-center">
                     {{ form_label(form.submit) }}

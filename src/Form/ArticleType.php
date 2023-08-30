@@ -2,14 +2,15 @@
 
 namespace App\Form;
 
+use App\Entity\Tag;
 use App\Entity\Article;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
-
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
@@ -44,13 +45,12 @@ class ArticleType extends AbstractType
                 ]
             ])
             // ->add('dateArticle')
-            ->add('tag', ChoiceType::class, [
-                'attr' => [
-                    'class' => 'px-4'
-                ],
+            ->add('tag', EntityType::class, [
                 'label_attr' => [
                     'class' => 'form-label mt-4'
-                ]
+                ],
+                'class' => Tag::class,
+                'multiple' => true,
             ])
             ->add('submit', SubmitType::class, [
                 'attr' => [

@@ -29,13 +29,14 @@ class Article
     #[ORM\OneToMany(mappedBy: 'article_id', targetEntity: Illustration::class)]
     private Collection $illustrations;
 
-    #[ORM\Column(length: 100, nullable: true)]
-    private ?array $tag = null;
+    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'articles')]
+    private Collection $tag;
 
     public function __construct()
     {
         $this->illustrations = new ArrayCollection();
         $this->dateArticle = new \DateTimeImmutable();
+        $this->tag = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -79,18 +80,6 @@ class Article
         return $this;
     }
 
-    public function getTag(): ?array
-    {
-        return $this->tag;
-    }
-
-    public function setTag(?array $tag): static
-    {
-        $this->tag = $tag;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Illustration>
      */
@@ -117,6 +106,30 @@ class Article
                 $illustration->setArticle(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tag>
+     */
+    public function getTag(): Collection
+    {
+        return $this->tag;
+    }
+
+    public function addTag(Tag $tag): static
+    {
+        if (!$this->tag->contains($tag)) {
+            $this->tag->add($tag);
+        }
+
+        return $this;
+    }
+
+    public function removeTag(Tag $tag): static
+    {
+        $this->tag->removeElement($tag);
 
         return $this;
     }
