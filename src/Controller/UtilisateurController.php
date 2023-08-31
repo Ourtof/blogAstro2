@@ -31,8 +31,15 @@ class UtilisateurController extends AbstractController
     {
         //besoin de droits admin
         $utilisateur = $this->getUser();
-
-        $this->adminConnexion($utilisateur, $session);
+        
+        if(is_null($utilisateur)) {
+                $session->set("message", "Merci de vous connecter");
+                return $this->redirectToRoute('login');
+            } else if(in_array('ROLE_ADMIN', $utilisateur->getRoles())){
+                return $this->render('utilisateur/index.html.twig', [
+                    'utilisateurs' => $this->utilisateurRepository->findAll(),
+                ]);
+            }
 
         return $this->redirectToRoute('home');
     }
@@ -86,7 +93,7 @@ class UtilisateurController extends AbstractController
         if ($utilisateur->getId() != $id) {
             // un utilisateur ne peut pas en modifier un autre
             $session->set("message", "Vous ne pouvez pas modifier cet utilisateur");
-            return $this->redirectToRoute('membre');
+            return $this->redirectToRoute('home');
         }
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
         $form->handleRequest($request);
@@ -100,7 +107,7 @@ class UtilisateurController extends AbstractController
             $this->em->persist($utilisateur);
             $this->em->flush();
 
-            return $this->redirectToRoute('utilisateur_index');
+            return $this->redirectToRoute('admin');
         }
 
         return $this->render('utilisateur/edit.html.twig', [
@@ -117,7 +124,9 @@ class UtilisateurController extends AbstractController
         if ($utilisateur->getId() != $id) {
             // un utilisateur ne peut pas en supprimer un autre
             $session->set("message", "Vous ne pouvez pas supprimer cet utilisateur");
-            return $this->redirectToRoute('membre');
+            return $this->redirectToRoute('membre', [
+                'utilisateur' => $utilisateur,
+            ]);
         }
 
         if ($this->isCsrfTokenValid('delete' . $utilisateur->getId(), $request->request->get('_token'))) {

@@ -24,7 +24,7 @@ class NavigationController extends AbstractController
 		// 	"return" => $return
 		// ]);
 		return $this->render('home/index.html.twig', [
-			"return" => $return
+			"return" => $return,
 		]);
 	}
 
@@ -46,7 +46,8 @@ class NavigationController extends AbstractController
 		$return = $this->message($session);
 			
 		return $this->render('/membre.html.twig', [
-			'return' => $return
+			'return' => $return,
+			'utilisateur' => $this->getUser()
 		]);
 	}
 
@@ -64,8 +65,9 @@ class NavigationController extends AbstractController
         }
 
         if (in_array('ROLE_ADMIN', $utilisateur->getRoles())) {
-            return $this->render('utilisateur/index.html.twig', [
+            return $this->render('admin.html.twig', [
                 'utilisateurs' => $this->utilisateurRepository->findAll(),
+				'utilisateur' => $this->getUser()
             ]);
         }
 
