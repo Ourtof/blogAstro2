@@ -29,7 +29,13 @@
                     <td>{{ article.titre }}</td>
                     <td>{{ article.contenu }}</td>
                     <td>{{ article.dateArticle ? article.dateArticle|date('Y-m-d') : '' }}</td>
-                    <td>{{ article.tag ? article.tag|json_encode : '' }}</td>
+                    {# <td>{{ article.tag ? article.tag|json_encode : '' }}</td> #}
+                    {# <td>{{ article.tag ? article.tag }}</td> #}
+                    {% if loop.index == 1 %}
+                    {% dump article.tag %}
+                    {% endif %}
+
+                    {# <td class="d-flex flex-row"> #}
                     <td>
                         <button type="button" class="btn btn-primary w-25 mb-5"><a href="{{ path('article_show', {'id': article.id}) }}">Voir</a></button>
                         <button type="button" class="btn btn-primary w-25 mb-5"><a href="{{ path('article_edit', {'id': article.id}) }}">Modifier</a></button>
