@@ -8,6 +8,11 @@
 
     <h2>{{ app.user.pseudo }} voici ton espace personnel</h2>
 
-     <a class="btn btn-primary" href="{{ path('utilisateur_edit', {'id': app.user.id}) }}">Modifier mon compte</a>
+    <div>
+        <button class="btn btn-primary"><a href="{{ path('utilisateur_edit', {'id': app.user.id}) }}">Modifier mon compte</a></button>
+    </div>
+    <div>
+        {{ include('utilisateur/_delete_form.html.twig') }}
+    </div>
 
 {% endblock %}
