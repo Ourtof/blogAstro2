@@ -1,7 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello NavigationController!{% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ asset('assets/css/article.css') }}">
+{% endblock %}
+
+{% block title %}Profil Admin{% endblock %}
 
 {% block body %}
-ok
+
+    <h1>Espace admin</h1>
+
+    <h2>Bonjour {{ app.user.pseudo }} voici ton espace personnel</h2>
+
+    <div class="row">
+        <div class="col-6">
+            <button class="btn btn-primary mt-3"><a href="{{ path('utilisateur_edit', {'id': app.user.id}) }}">Modifier mon compte</a></button>
+            <button class="btn btn-primary mt-3"><a href="{{ path('utilisateur_index') }}">Index utilisateur</a></button>
+            <button class="btn btn-primary mt-3"><a href="{{ path('article_index') }}">Index article</a></button>
+            <button class="btn btn-primary mt-3"><a href="{{ path('contact_index') }}">Voir message</a></button>
+            {{ include('utilisateur/_delete_form.html.twig') }}
+        </div>
+    </div>   
+
+
+
+
 {% endblock %}
