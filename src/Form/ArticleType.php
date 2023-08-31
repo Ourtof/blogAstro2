@@ -46,6 +46,9 @@ class ArticleType extends AbstractType
             ])
             // ->add('dateArticle')
             ->add('tag', EntityType::class, [
+                'attr' => [
+                    'class' => 'form-select w-25 h-25'
+                ],
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
