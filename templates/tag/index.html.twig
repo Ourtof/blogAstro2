@@ -24,9 +24,9 @@
                     <td>{{ tag.id }}</td>
                     <td>{{ tag.nom }}</td>
                     <td>
-                        <button type="button" class="btn btn-primary w-25 mb-5"><a href="{{ path('tag_show', {'id': tag.id}) }}">Voir</a></button>
-                        <button type="button" class="btn btn-primary w-25 mb-5"><a href="{{ path('tag_edit', {'id': tag.id}) }}">Modifier</a></button>
-                        <button type="button" class="btn btn-primary w-25 mb-5"><a href="{{ path('tag_delete', {'id': tag.id}) }}">Effacer</a></button>
+                        <button type="button" class="btn btn-primary w-25"><a href="{{ path('tag_show', {'id': tag.id}) }}">Voir</a></button>
+                        <button type="button" class="btn btn-primary w-25"><a href="{{ path('tag_edit', {'id': tag.id}) }}">Modifier</a></button>
+                        {{ include('tag/_delete_form.html.twig') }}
                     </td>
                 </tr>
             {% else %}
