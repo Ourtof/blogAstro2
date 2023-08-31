@@ -1,11 +1,14 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ asset('assets/css/article.css') }}">
+{% endblock %}
+
 {% block title %}Contact{% endblock %}
 
 {% block body %}
-    <h1>Contact</h1>
 
-    <table class="table">
+    {# <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -32,11 +35,32 @@
                 <td>{{ contact.objet }}</td>
             </tr>
         </tbody>
-    </table>
+    </table> #}
 
-    <a href="{{ path('contact_index') }}">back to list</a>
+    <div class="d-flex justify-content-center mt-5">
+        <h1>
+            {{ contact.prenom }}
+            {{ contact.nom }}
+        </h1>
+    </div>
+    {# TODO : demander si il y a que le moyen css classique pour faire du margin plus grand #}
+        <div class="margin mt-5">
+            {{ contact.objet }}
+        </div>
+        <div class="margin">
+            {{ contact.contenuMessage }}
+        </div>
 
-    <a href="{{ path('contact_edit', {'id': contact.id}) }}">edit</a>
+    {# <a href="{{ path('contact_index') }}">back to list</a> #}
 
+    {# <a href="{{ path('contact_edit', {'id': contact.id}) }}">edit</a> #}
+{# <div class="mt-5">
     {{ include('contact/_delete_form.html.twig') }}
+</div> #}
+    <div class="row mt-5">
+        <div class="col-6">
+            <button class="btn btn-info"><a href="{{ path('contact_index') }}">Retour à l'index</a></button>
+            {{ include('contact/_delete_form.html.twig') }}
+        </div>
+    </div>
 {% endblock %}

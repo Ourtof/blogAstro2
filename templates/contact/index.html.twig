@@ -5,16 +5,17 @@
 {% block body %}
     <h1>Contact index</h1>
 
+<div class="row">
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Prenom</th>
-                <th>Nom</th>
-                <th>AdresseMail</th>
-                <th>ContenuMessage</th>
-                <th>Objet</th>
-                <th>actions</th>
+                <th class="col-1">Id</th>
+                <th class="col-1">Prenom</th>
+                <th class="col-1">Nom</th>
+                <th class="col-2">Email</th>
+                <th class="col-1">Objet</th>
+                <th class="col-2">Message</th>
+                <th class="col-4">actions</th>
             </tr>
         </thead>
         <tbody>
@@ -24,20 +25,25 @@
                 <td>{{ contact.prenom }}</td>
                 <td>{{ contact.nom }}</td>
                 <td>{{ contact.adresseMail }}</td>
-                <td>{{ contact.contenuMessage }}</td>
                 <td>{{ contact.objet }}</td>
+                <td>{{ contact.contenuMessage }}</td>
                 <td>
-                    <a href="{{ path('contact_show', {'id': contact.id}) }}">show</a>
-                    <a href="{{ path('contact_edit', {'id': contact.id}) }}">edit</a>
+                    {# <a href="{{ path('contact_show', {'id': contact.id}) }}">show</a> #}
+                    <button type="button" class="btn btn-primary w-25"><a href="{{ path('contact_show', {'id': contact.id}) }}">Voir</a></button>
+                    {# <a href="{{ path('contact_edit', {'id': contact.id}) }}">edit</a> #}
+                    {# <button type="button" class="btn btn-primary w-25"><a href="{{ path('contact_edit', {'id': contact.id}) }}">Modifier</a></button> #}
+                    {{ include('contact/_delete_form.html.twig') }}
+
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="7">Pas de messages.</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+</div>
 
-    <a href="{{ path('contact_new') }}">Create new</a>
+    {# <a href="{{ path('contact_new') }}">Create new</a> #}
 {% endblock %}
