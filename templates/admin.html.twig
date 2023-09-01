@@ -14,11 +14,12 @@
 
     <div class="row">
         <div class="col-6">
-            <button class="btn btn-primary mt-3"><a href="{{ path('utilisateur_edit', {'id': app.user.id}) }}">Modifier mon compte</a></button>
-            <button class="btn btn-primary mt-3"><a href="{{ path('utilisateur_index') }}">Index utilisateur</a></button>
-            <button class="btn btn-primary mt-3"><a href="{{ path('article_index') }}">Index article</a></button>
-            <button class="btn btn-primary mt-3"><a href="{{ path('contact_index') }}">Voir message</a></button>
-            <button class="btn btn-primary mt-3"><a href="{{ path('logout') }}">Déconnexion</a></button>
+            <button type="button" class="btn btn-primary mt-3"><a href="{{ path('utilisateur_edit', {'id': app.user.id}) }}">Modifier mon compte</a></button>
+            <button type="button" class="btn btn-primary mt-3"><a href="{{ path('utilisateur_index') }}">Index utilisateur</a></button>
+            <button type="button" class="btn btn-primary mt-3"><a href="{{ path('article_index') }}">Index article</a></button>
+            <button type="button" class="btn btn-primary mt-3"><a href="{{ path('illustration_index') }}">Voir illustration</a></button>
+            <button type="button" class="btn btn-primary mt-3"><a href="{{ path('contact_index') }}">Voir message</a></button>
+            <button type="button" class="btn btn-primary mt-3"><a href="{{ path('logout') }}">Déconnexion</a></button>
             {{ include('utilisateur/_delete_form.html.twig') }}
         </div>
     </div>   
