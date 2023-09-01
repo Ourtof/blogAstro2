@@ -17,7 +17,9 @@
         {% for illustration in illustrations %}
             <tr>
                 <td>{{ illustration.id }}</td>
-                <td>{{ illustration.nomFichier }}</td>
+                <td>{{ illustration.nomFichier }}
+                    <img src="{{ asset('uploads/') ~ illustration.nomFichier }}" alt="image astro" class="w-25">
+                </td>
                 <td>
                     <a href="{{ path('illustration_show', {'id': illustration.id}) }}">show</a>
                     <a href="{{ path('illustration_edit', {'id': illustration.id}) }}">edit</a>

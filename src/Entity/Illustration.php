@@ -17,7 +17,7 @@ class Illustration
     private ?string $nomFichier = null;
 
     #[ORM\ManyToOne(inversedBy: 'illustrations')]
-    private ?article $article = null;
+    private ?Article $article = null;
 
     public function getId(): ?int
     {
@@ -36,12 +36,12 @@ class Illustration
         return $this;
     }
 
-    public function getArticle(): ?article
+    public function getArticle(): ?Article
     {
         return $this->article;
     }
 
-    public function setArticle(?article $article): static
+    public function setArticle(?Article $article): static
     {
         $this->article = $article;
 

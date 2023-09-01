@@ -4,12 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Illustration;
 use App\Form\IllustrationType;
-use App\Repository\IllustrationRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\IllustrationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/illustration')]
 class IllustrationController extends AbstractController
@@ -23,13 +24,20 @@ class IllustrationController extends AbstractController
     }
 
     #[Route('/new', name: 'illustration_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, #[Autowire('%uploads_dir%')] string $uploadsDir): Response
     {
         $illustration = new Illustration();
         $form = $this->createForm(IllustrationType::class, $illustration);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // S'assure qu'on récupère bien les données dans le fichier
+            if ($nomFichier = $form['nomFichier']->getData()) {
+                $filename = bin2hex(random_bytes(6)) . '.' . $nomFichier->guessExtension();
+                $nomFichier->move($uploadsDir, $filename);
+                $illustration->setNomFichier($filename);
+            }
+
             $entityManager->persist($illustration);
             $entityManager->flush();
 
