@@ -1,26 +1,23 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ asset('assets/css/article.css') }}">
+{% endblock %}
+
 {% block title %}Illustration{% endblock %}
 
 {% block body %}
-    <h1>Illustration</h1>
+    <div class="d-flex justify-content-center mt-5">
+        <img src="{{ asset('uploads/') ~ illustration.nomFichier }}" alt="images astronomie">
+    </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ illustration.id }}</td>
-            </tr>
-            <tr>
-                <th>NomFichier</th>
-                <td>{{ illustration.nomFichier }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('illustration_index') }}">back to list</a>
-
-    <a href="{{ path('illustration_edit', {'id': illustration.id}) }}">edit</a>
-
-    {{ include('illustration/_delete_form.html.twig') }}
+    <div class="row">
+        <div class="col-6">
+        {% if is_granted("ROLE_ADMIN") %}
+            <button class="btn btn-info mt-3"><a href="{{ path('illustration_index') }}">Retour à l'index</a></button>
+            <button class="btn btn-info mt-3"><a href="{{ path('illustration_edit', {'id': illustration.id}) }}">Modifier</a></button>
+            {{ include('illustration/_delete_form.html.twig') }}
+        {% endif %}
+        </div>
+    </div>
 {% endblock %}

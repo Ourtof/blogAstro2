@@ -1,11 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Illustration{% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ asset('assets/css/contact.css') }}">
+{% endblock %}
+
+{% block title %}Nouvelle Illustration{% endblock %}
 
 {% block body %}
-    <h1>Create new Illustration</h1>
+    {# <h1>Create new Illustration</h1>
 
     {{ include('illustration/_form.html.twig') }}
 
-    <a href="{{ path('illustration_index') }}">back to list</a>
+    <a href="{{ path('illustration_index') }}">back to list</a> #}
+
+    <fieldset class="my-5">
+        <legend>Ajouter une illustration</legend>
+        {{ form_start(form, {'attr': {'id': 'new_edit_illustration'}}) }}
+
+        <div class="d-flex justify-content-center">
+            <div class="row w-75">
+                <div class="col-12">
+                    {{ form_label(form.nomFichier) }}
+                    {{ form_widget(form.nomFichier) }}
+                    {{ form_errors(form.nomFichier) }}
+                </div>
+                {# <div class="col-12">
+                    {{ form_label(form.article) }}
+                    {{ form_widget(form.article) }}
+                    {{ form_errors(form.article) }}
+                </div> #}
+                <div class="col-12 d-flex justify-content-center">
+                    {{ form_label(form.submit) }}
+                    {{ form_widget(form.submit) }}
+                </div>
+            </div>
+        </div>
+        <button type"button" class="btn btn-info"><a href="{{ path('illustration_index') }}">Retour</a></button>
+            {{ form_end(form) }}
+    </fieldset>
 {% endblock %}
