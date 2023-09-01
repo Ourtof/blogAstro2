@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\IllustrationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: IllustrationRepository::class)]
@@ -16,8 +18,13 @@ class Illustration
     #[ORM\Column(length: 255)]
     private ?string $nomFichier = null;
 
-    #[ORM\ManyToOne(inversedBy: 'illustrations')]
-    private ?Article $article = null;
+    #[ORM\OneToMany(mappedBy: 'illustration', targetEntity: Article::class)]
+    private Collection $articles;
+
+    public function __construct()
+    {
+        $this->articles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -36,15 +43,38 @@ class Illustration
         return $this;
     }
 
-    public function getArticle(): ?Article
+    /**
+     * @return Collection<int, Article>
+     */
+    public function getArticles(): Collection
     {
-        return $this->article;
+        return $this->articles;
     }
 
-    public function setArticle(?Article $article): static
+    public function addArticle(Article $article): static
     {
-        $this->article = $article;
+        if (!$this->articles->contains($article)) {
+            $this->articles->add($article);
+            $article->setIllustration($this);
+        }
 
         return $this;
+    }
+
+    public function removeArticle(Article $article): static
+    {
+        if ($this->articles->removeElement($article)) {
+            // set the owning side to null (unless already changed)
+            if ($article->getIllustration() === $this) {
+                $article->setIllustration(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->nomFichier;
     }
 }

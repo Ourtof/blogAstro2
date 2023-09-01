@@ -26,15 +26,15 @@ class Article
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $dateArticle = null;
 
-    #[ORM\OneToMany(mappedBy: 'article_id', targetEntity: Illustration::class)]
-    private Collection $illustrations;
-
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'articles')]
     private Collection $tag;
 
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    private ?Illustration $illustration = null;
+
     public function __construct()
     {
-        $this->illustrations = new ArrayCollection();
+        // $this->illustrations = new ArrayCollection();
         $this->dateArticle = new \DateTimeImmutable();
         $this->tag = new ArrayCollection();
     }
@@ -81,36 +81,6 @@ class Article
     }
 
     /**
-     * @return Collection<int, Illustration>
-     */
-    public function getIllustrations(): Collection
-    {
-        return $this->illustrations;
-    }
-
-    public function addIllustration(Illustration $illustration): static
-    {
-        if (!$this->illustrations->contains($illustration)) {
-            $this->illustrations->add($illustration);
-            $illustration->setArticle($this);
-        }
-
-        return $this;
-    }
-
-    public function removeIllustration(Illustration $illustration): static
-    {
-        if ($this->illustrations->removeElement($illustration)) {
-            // set the owning side to null (unless already changed)
-            if ($illustration->getArticle() === $this) {
-                $illustration->setArticle(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Tag>
      */
     public function getTag(): Collection
@@ -137,5 +107,17 @@ class Article
     public function __toString(): string
     {
         return $this->titre;
+    }
+
+    public function getIllustration(): ?Illustration
+    {
+        return $this->illustration;
+    }
+
+    public function setIllustration(?Illustration $illustration): static
+    {
+        $this->illustration = $illustration;
+
+        return $this;
     }
 }
