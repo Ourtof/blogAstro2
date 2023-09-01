@@ -28,7 +28,7 @@ class ArticleController extends AbstractController
     #[Route('/index', name: 'article_index', methods: ['GET'])]
     public function index(): Response
     {
-        $articles = $this->articleRepository->findAll();
+        $articles = $this->articleRepository->findAllWithTags();
         dump($articles);
         return $this->render('article/index.html.twig', [
             'articles' => $articles,

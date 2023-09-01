@@ -29,11 +29,13 @@
                     <td>{{ article.titre }}</td>
                     <td>{{ article.contenu }}</td>
                     <td>{{ article.dateArticle ? article.dateArticle|date('Y-m-d') : '' }}</td>
-                    {# <td>{{ article.tag ? article.tag|json_encode : '' }}</td> #}
+                    <td>{% for tag in article.tag %}
+                        {{ tag.nom }}
+                    {% endfor %}</td>
                     {# <td>{{ article.tag ? article.tag }}</td> #}
-                    {% if loop.index == 1 %}
-                    {% dump article.tag %}
-                    {% endif %}
+                    {# {% if loop.index == 1 %}
+                        {% dump article.tag %}
+                    {% endif %} #}
 
                     {# <td class="d-flex flex-row"> #}
                     <td>
