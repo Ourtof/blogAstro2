@@ -6,6 +6,8 @@ use App\Entity\Illustration;
 use App\Form\IllustrationType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\IllustrationRepository;
+use Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -33,10 +35,18 @@ class IllustrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // S'assure qu'on récupère bien les données dans le fichier
             if ($nomFichier = $form['nomFichier']->getData()) {
+                dump($uploadsDir);
                 $filename = bin2hex(random_bytes(6)) . '.' . $nomFichier->guessExtension();
                 $nomFichier->move($uploadsDir, $filename);
                 $illustration->setNomFichier($filename);
             }
+
+            
+            
+            
+            // if() {
+                // $nomFichier->remove($uploadsDir, $filename);
+            // }
 
             $entityManager->persist($illustration);
             $entityManager->flush();
@@ -77,12 +87,18 @@ class IllustrationController extends AbstractController
     }
 
     #[Route('/{id}', name: 'illustration_delete', methods: ['POST'])]
-    public function delete(Request $request, Illustration $illustration, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Illustration $illustration, EntityManagerInterface $entityManager, #[Autowire('%uploads_dir%')] string $uploadsDir): Response
     {
         if ($this->isCsrfTokenValid('delete'.$illustration->getId(), $request->request->get('_token'))) {
+            dump($uploadsDir . $illustration->getNomFichier());
+            $filesystem = new Filesystem();
+            $filesystem->remove($uploadsDir . "/" . $illustration->getNomFichier());
+            
             $entityManager->remove($illustration);
             $entityManager->flush();
         }
+        
+        
 
         return $this->redirectToRoute('illustration_index', [], Response::HTTP_SEE_OTHER);
     }
