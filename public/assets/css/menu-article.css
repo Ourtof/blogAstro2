@@ -1,0 +1,16 @@
+#search-addon {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 992px) {
+    #tag-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 50px 0;
+    }
+
+    #tag-wrapper select {
+        margin: 3% 0;
+    }
+}

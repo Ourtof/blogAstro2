@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ asset('assets/css/menu-article.css') }}">
+{% endblock %}
+
 {% block title %}Menu{% endblock %}
 
 {% block body %}
@@ -7,15 +11,16 @@
 {# Barre de recherche #}
 <div class="d-flex justify-content-center mb-5">
     <div class="input-group rounded pt-5 w-50">
-    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-    <span class="input-group-text border-0" id="search-addon">
+    <input type="search" class="form-control rounded" id="searchbar" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+    <span class="input-group-text border-0 d-none d-sm-block" id="search-addon">
         <i class="bi bi-search"></i>
     </span>
     </div>
 </div>
 
 <form>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center" id="tag-wrapper">
+    {# <div class="d-flex flex-sm-column justify-content-lg-center" id="tag-wrapper"> #}
         <label for="choose-tag" class="mx-3">Tag</label>
         <select name="choose-tag" id="choose-tag" class="form-select w-25">
             {% for tag in tagArray %}
@@ -45,9 +50,10 @@
 {% endblock %}
 
 {% block javascript %}
-    <script>
+    {# <script>
         const getArticleByTagUrl = "{{ path('menu-article-get-article-ajax') }}";
-    </script>
+    </script> #}
 
-    <script src="{{ asset('assets/js/article-search.js') }}"></script>
+    {# <script src="{{ asset('assets/js/article-search.js') }}"></script> #}
+    <script src="{{ asset('assets/js/searchbar.js') }}"></script>
 {% endblock %}
