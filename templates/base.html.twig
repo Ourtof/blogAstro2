@@ -49,10 +49,10 @@
         {% include 'template-parts/menu/_header-menu.html.twig' %}
 
         <div class="container-fluid">
-        {% block body %}{% endblock %}
+            {% block body %}{% endblock %}
         </div>
 
-        {# {% include 'template-parts/footer/_footer.html.twig' %} #}
+        {% include 'template-parts/footer/_footer.html.twig' %}
 
         {% block javascript %}{% endblock %}
     </body>
