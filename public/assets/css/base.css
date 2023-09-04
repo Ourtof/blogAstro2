@@ -6,6 +6,18 @@
     font-family: "Lora";
 }
 
+body {
+    background-color: rgb(26, 26, 36);
+}
+
+label, h2, h3, h4, legend {
+    color: grey;
+}
+
+.card {
+    background-color: grey;
+}
+
 a {
     text-decoration: none;
     color: white;

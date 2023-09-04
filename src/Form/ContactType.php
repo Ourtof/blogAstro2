@@ -20,7 +20,7 @@ class ContactType extends AbstractType
         $builder
             ->add('prenom', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control bg-secondary',
                     'minlenght' => '2',
                     'maxlenght' => '50',
                 ],
@@ -35,7 +35,7 @@ class ContactType extends AbstractType
             ])
             ->add('nom', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control bg-secondary',
                     'minlenght' => '2',
                     'maxlenght' => '50',
                 ],
@@ -50,7 +50,7 @@ class ContactType extends AbstractType
             ])
             ->add('adresse_mail', EmailType::class, [
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control bg-secondary',
                     'minlenght' => '2',
                     'maxlenght' => '180',
                 ],
@@ -66,7 +66,7 @@ class ContactType extends AbstractType
             ])
             ->add('objet', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control bg-secondary',
                     'minlenght' => '2',
                     'maxlenght' => '255',
                 ],
@@ -81,7 +81,7 @@ class ContactType extends AbstractType
             ])
             ->add('contenu_message', TextareaType::class, [
                 'attr' => [
-                    'class' => 'form-control',
+                    'class' => 'form-control bg-secondary',
                 ],
                 'label' => 'Message',
                 'label_attr' => [
