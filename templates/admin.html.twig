@@ -8,23 +8,40 @@
 
 {% block body %}
 
-    <h1>Espace admin</h1>
+{# <div class=" d-flex justify-content-center flex-column"> #}
+    <h2 class="profil mt-5">Espace admin</h2>
 
-    <h2>Bonjour {{ app.user.pseudo }} voici ton espace personnel</h2>
+    <h3 class="profil">Bonjour {{ app.user.pseudo }} voici ton espace personnel</h3>
 
-    <div class="row">
-        <div class="col-6">
-            <button type="button" class="btn btn-primary mt-3"><a href="{{ path('utilisateur_edit', {'id': app.user.id}) }}">Modifier mon compte</a></button>
-            <button type="button" class="btn btn-primary mt-3"><a href="{{ path('utilisateur_index') }}">Index utilisateur</a></button>
-            <button type="button" class="btn btn-primary mt-3"><a href="{{ path('article_index') }}">Index article</a></button>
-            <button type="button" class="btn btn-primary mt-3"><a href="{{ path('illustration_index') }}">Voir illustration</a></button>
-            <button type="button" class="btn btn-primary mt-3"><a href="{{ path('contact_index') }}">Voir message</a></button>
-            <button type="button" class="btn btn-primary mt-3"><a href="{{ path('logout') }}">Déconnexion</a></button>
-            {{ include('utilisateur/_delete_form.html.twig') }}
+    {# <div class="row"> #}
+        <div class="w-25 my-5 test">
+            <p class="profil">Partie utilisateur</p>
+            <div class="col-12 profil">
+                <button type="button" class="btn btn-primary m-2"><a href="{{ path('utilisateur_edit', {'id': app.user.id}) }}">Modifier mon compte</a></button>
+                <button type="button" class="btn btn-primary m-2"><a href="{{ path('utilisateur_index') }}">Index utilisateur</a></button>
+            </div>
         </div>
-    </div>   
+        <div class="w-25 my-5 test">
+            <p class="profil">Partie rédaction</p>
+            <div class="col-12 profil">
+                <button type="button" class="btn btn-primary m-2"><a href="{{ path('article_index') }}">Index article</a></button>
+                <button type="button" class="btn btn-primary m-2"><a href="{{ path('illustration_index') }}">Voir illustration</a></button>
+                <button type="button" class="btn btn-primary m-2"><a href="{{ path('tag_index') }}">Voir tag</a></button>
+            </div>
+        </div>
+        <div class="w-25 my-5 test">
+            <p class="profil">Partie administration</p>
+            <div class="col-12 profil">
+                <button type="button" class="btn btn-primary m-2"><a href="{{ path('contact_index') }}">Voir message</a></button>
+            </div>
+        </div>
+    </div>
+    <div class="m-5">
+        <button type="button" class="btn btn-primary"><a href="{{ path('logout') }}">Déconnexion</a></button>
+        {{ include('utilisateur/_delete_form.html.twig') }}
+    </div>
 
-
+{# </div> #}
 
 
 {% endblock %}
