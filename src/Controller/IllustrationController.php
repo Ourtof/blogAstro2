@@ -90,7 +90,6 @@ class IllustrationController extends AbstractController
     public function delete(Request $request, Illustration $illustration, EntityManagerInterface $entityManager, #[Autowire('%uploads_dir%')] string $uploadsDir): Response
     {
         if ($this->isCsrfTokenValid('delete'.$illustration->getId(), $request->request->get('_token'))) {
-            dump($uploadsDir . $illustration->getNomFichier());
             $filesystem = new Filesystem();
             $filesystem->remove($uploadsDir . "/" . $illustration->getNomFichier());
             
