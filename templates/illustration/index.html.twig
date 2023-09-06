@@ -9,7 +9,6 @@
         <button type="button" class="btn btn-info w-25 m-2"><a href="{{ path('illustration_new') }}">Ajouter une illustration</a></button>
         <button type="button" class="btn btn-info w-25 m-2"><a href="{{ path('article_index') }}">Voir article</a></button>
         <button type="button" class="btn btn-info w-25 m-2"><a href="{{ path('tag_index') }}">Voir tag</a></button>
-        {# <button type="button" class="btn btn-info w-25 m-2"><a href="{{ path('tag_new') }}">Créer un tag</a></button> #}
     </div>
 
     {# <div class="row"> #}
@@ -28,10 +27,6 @@
                     <td>{{ illustration.nomFichier }}
                         <img src="{{ asset('uploads/') ~ illustration.nomFichier }}" alt="images astronomie" class="w-25">
                     </td>
-                    {# <td>
-                        <a href="{{ path('illustration_show', {'id': illustration.id}) }}">show</a>
-                        <a href="{{ path('illustration_edit', {'id': illustration.id}) }}">edit</a>
-                    </td> #}
                     <td>
                         <button type="button" class="btn btn-primary w-25"><a href="{{ path('illustration_show', {'id': illustration.id}) }}">Voir</a></button>
                         <button type="button" class="btn btn-primary w-25"><a href="{{ path('illustration_edit', {'id': illustration.id}) }}">Modifier</a></button>
@@ -46,6 +41,4 @@
             </tbody>
         </table>
     </div>
-
-    {# <a href="{{ path('illustration_new') }}">Create new</a> #}
 {% endblock %}

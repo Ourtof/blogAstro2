@@ -68,7 +68,6 @@ class UtilisateurType extends AbstractType
                 new Assert\Length(['min' => 2, 'max' => 50])
             ]
         ])
-            // ->add('dateNaissance')
             ->add('adresse', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
@@ -117,12 +116,6 @@ class UtilisateurType extends AbstractType
                     new Assert\Length(['min' => 2, 'max' => 50])
                 ]
             ])
-            // ->add('adresseMail')
-            // ->add('motDePasse')
-            // ->add('estAdmin')
-            // ->add('email')
-//            ->add('roles')
-            // ->add('password')
             ->add('email', EmailType::class, [
                 'attr' => [
                     'class' => 'form-control',

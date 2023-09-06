@@ -45,7 +45,6 @@ class ArticleType extends AbstractType
                     new Assert\NotBlank(),
                 ]
             ])
-            // ->add('dateArticle')
             ->add('tag', EntityType::class, [
                 'attr' => [
                     'class' => 'form-select w-25 h-25'
@@ -56,9 +55,6 @@ class ArticleType extends AbstractType
                 'class' => Tag::class,
                 'multiple' => true,
             ])
-            // ->add('illustration', EntityType::class, [
-            //     'class' => Illustration::class,
-            // ])
             ->add('illustration')
             ->add('submit', SubmitType::class, [
                 'attr' => [

@@ -22,15 +22,4 @@ trait GeneralTrait
 
         return $return;
     }
- 
-    // public function adminConnexion(UserInterface $utilisateur, Session $session) {
-    //     if(is_null($utilisateur)) {
-    //         $session->set("message", "Merci de vous connecter");
-    //         return $this->redirectToRoute('login');
-    //     } else if(in_array('ROLE_ADMIN', $utilisateur->getRoles())){
-    //         return $this->render('utilisateur/index.html.twig', [
-    //             'utilisateurs' => $this->utilisateurRepository->findAll(),
-    //         ]);
-    //     }
-    // }
 }

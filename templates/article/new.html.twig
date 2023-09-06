@@ -23,17 +23,11 @@
                     {{ form_widget(form.contenu) }}
                 </div>
                 <div class="col-12">
-                    {# {{ tag.nom }} #}
                     {# TODO : faire marcher tag #}
-                    {# {% if form.tag.nom is defined %} #}
-                        {# {{ form_label(form.tag) }}
-                        {{ form_widget(form.tag) }} #}
                         {{ form_label(form.tag) }}
                     {{ form_widget(form.tag) }}
                     {% if tag.nom is defined %}
                     {% endif %}
-                    {# {{ form_row(form.tag) }} #}
-                    {# {% endif %} #}
                 </div>
                 <div class="col-12 d-flex justify-content-center">
                     {{ form_label(form.submit) }}
@@ -44,8 +38,4 @@
         <button type"button" class="btn btn-info"><a href="{{ path('article_index') }}">Retour</a></button>
             {{ form_end(form) }}
     </fieldset>
-
-    {# {{ include('article/_form.html.twig') }} #}
-
-    
 {% endblock %}

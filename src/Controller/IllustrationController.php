@@ -41,13 +41,6 @@ class IllustrationController extends AbstractController
                 $illustration->setNomFichier($filename);
             }
 
-            
-            
-            
-            // if() {
-                // $nomFichier->remove($uploadsDir, $filename);
-            // }
-
             $entityManager->persist($illustration);
             $entityManager->flush();
 

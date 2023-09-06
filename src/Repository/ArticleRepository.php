@@ -51,12 +51,7 @@ class ArticleRepository extends ServiceEntityRepository
     }
 
     public function findAllWithTags() {
-        /*
-        $qb = $this->createQueryBuilder('b')
-            ->addSelect('g')
-            ->leftJoin('b.genre', 'g')
-        ;*/
-
+        
         $qb = $this->createQueryBuilder('article')
             ->addSelect('tag')
             ->leftJoin('article.tag', 'tag')

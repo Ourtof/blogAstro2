@@ -28,10 +28,7 @@
                 <td>{{ contact.objet }}</td>
                 <td>{{ contact.contenuMessage }}</td>
                 <td>
-                    {# <a href="{{ path('contact_show', {'id': contact.id}) }}">show</a> #}
                     <button type="button" class="btn btn-primary w-25"><a href="{{ path('contact_show', {'id': contact.id}) }}">Voir</a></button>
-                    {# <a href="{{ path('contact_edit', {'id': contact.id}) }}">edit</a> #}
-                    {# <button type="button" class="btn btn-primary w-25"><a href="{{ path('contact_edit', {'id': contact.id}) }}">Modifier</a></button> #}
                     {{ include('contact/_delete_form.html.twig') }}
 
                 </td>
@@ -44,6 +41,4 @@
         </tbody>
     </table>
 </div>
-
-    {# <a href="{{ path('contact_new') }}">Create new</a> #}
 {% endblock %}

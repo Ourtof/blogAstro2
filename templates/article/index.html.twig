@@ -4,7 +4,6 @@
 
 {% block body %}
     <h1>Article index</h1>
-{# <div class="container-fluid"> #}
     <div class="d-flex justify-content-end">
         <button type="button" class="btn btn-info w-25 m-2"><a href="{{ path('article_new') }}">Créer un article</a></button>
         <button type="button" class="btn btn-info w-25 m-2"><a href="{{ path('tag_index') }}">Voir tag</a></button>
@@ -32,12 +31,6 @@
                     <td>{% for tag in article.tag %}
                         {{ tag.nom }}
                     {% endfor %}</td>
-                    {# <td>{{ article.tag ? article.tag }}</td> #}
-                    {# {% if loop.index == 1 %}
-                        {% dump article.tag %}
-                    {% endif %} #}
-
-                    {# <td class="d-flex flex-row"> #}
                     <td>
                         <button type="button" class="btn btn-primary w-25 mb-5"><a href="{{ path('article_show', {'id': article.id}) }}">Voir</a></button>
                         <button type="button" class="btn btn-primary w-25 mb-5"><a href="{{ path('article_edit', {'id': article.id}) }}">Modifier</a></button>
@@ -51,9 +44,5 @@
             {% endfor %}
             </tbody>
         </table>
-    </div>
-    {# </div> #}
-
-    {# <a href="{{ path('article_new') }}">Create new</a> #}
-    
+    </div>  
 {% endblock %}

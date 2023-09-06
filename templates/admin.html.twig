@@ -7,13 +7,10 @@
 {% block title %}Profil Admin{% endblock %}
 
 {% block body %}
-
-{# <div class=" d-flex justify-content-center flex-column"> #}
     <h2 class="profil mt-5">Espace admin</h2>
 
     <h3 class="profil">Bonjour {{ app.user.pseudo }} voici ton espace personnel</h3>
 
-    {# <div class="row"> #}
         <div class="w-25 my-5 test">
             <p class="profil">Partie utilisateur</p>
             <div class="col-12 profil">
@@ -40,8 +37,4 @@
         <button type="button" class="btn btn-primary"><a href="{{ path('logout') }}">Déconnexion</a></button>
         {{ include('utilisateur/_delete_form.html.twig') }}
     </div>
-
-{# </div> #}
-
-
 {% endblock %}

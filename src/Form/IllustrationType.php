@@ -18,16 +18,6 @@ class IllustrationType extends AbstractType
         // TODO : mettre en force filetype
         $builder
             ->add('nomFichier', FileType::class)
-            // ->add('article', ChoiceType::class, [
-            //     'attr' => [
-            //         'class' => 'form-select w-25 h-25'
-            //     ],
-            //     'label_attr' => [
-            //         'class' => 'form-label mt-4'
-            //     ],
-            //     // 'class' => Tag::class,
-            //     'multiple' => true,
-            // ])
             ->add('submit', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary mt-4 rounded-pill btn-lg'

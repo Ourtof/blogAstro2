@@ -34,7 +34,6 @@ class Article
 
     public function __construct()
     {
-        // $this->illustrations = new ArrayCollection();
         $this->dateArticle = new \DateTimeImmutable();
         $this->tag = new ArrayCollection();
     }

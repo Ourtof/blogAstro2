@@ -142,9 +142,6 @@ class RegistrationFormType extends AbstractType
                     new Assert\Length(['min' => 2, 'max' => 50])
                 ]
             ])
-            // ->add('adresseMail')
-            // ->add('motDePasse')
-            // ->add('estAdmin')
             ->add('email', EmailType::class, [
                 'attr' => [
                     'class' => 'form-control',
