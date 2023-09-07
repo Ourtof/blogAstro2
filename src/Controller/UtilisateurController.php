@@ -27,7 +27,7 @@ class UtilisateurController extends AbstractController
     }
 
     #[Route('/index', name: 'utilisateur_index', methods: ['GET'])]
-    public function index(Session $session): RedirectResponse
+    public function index(Session $session): Response
     {
         //besoin de droits admin
         $utilisateur = $this->getUser();
@@ -64,7 +64,7 @@ class UtilisateurController extends AbstractController
                 $utilisateur,
                 $utilisateur->getPassword()
             );
-            // $utilisateur->setMotDePasse($passwordHasher->hashPassword($utilisateur, $utilisateur->getMotDePasse()));
+
             $this->em->persist($utilisateur);
             $this->em->flush();
 
@@ -103,7 +103,6 @@ class UtilisateurController extends AbstractController
                 $utilisateur,
                 $utilisateur->getPassword()
             );
-            // $utilisateur->setMotDePasse($passwordHasher->hashPassword($utilisateur, $utilisateur->getMotDePasse()));
             $this->em->persist($utilisateur);
             $this->em->flush();
 

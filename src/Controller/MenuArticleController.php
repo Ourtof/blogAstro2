@@ -21,13 +21,17 @@ class MenuArticleController extends AbstractController
     #[Route('/menu/article', name: 'menu_article')]
     public function index(): Response
     {
+        $rss = simplexml_load_file('https://www.nasa.gov/rss/dyn/breaking_news.rss');
+        // On récupère des unités de flux via channel Item
+        $rssItems = $rss->channel->item;
         $tagArray = $this->tagRepository->findAll();
 
         $articleArray = $this->articleRepository->findAll();
 
         return $this->render('menu_article/index.html.twig', [
             "tagArray" => $tagArray,
-            "articleArray" => $articleArray 
+            "articleArray" => $articleArray,
+            "rssItems" => $rssItems
         ]);
     }
 

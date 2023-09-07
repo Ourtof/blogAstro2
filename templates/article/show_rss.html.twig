@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ asset('assets/css/article.css') }}">
+{% endblock %}
+
+{% block title %}Article{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-center mt-5">
+            {% dump rssItem %}
+        <h1>
+            {{ rssItem.title}}
+        </h1>
+    </div>
+        <article class="margin">
+            {{ rssItem.description }}
+            <img src="{{ rssItem.enclosure.attributes.url  }}" alt="{{ rssItem.title }}" class="m-5" />
+        </article>
+        <div class="m-5 d-flex justify-content-end">
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <button class="btn btn-info"><a href="{{ path('menu_article') }}">Retour au menu</a></button>
+            {% if is_granted("ROLE_ADMIN") %}
+                <button class="btn btn-info"><a href="{{ path('article_index') }}">Retour à l'index</a></button>
+            {% endif %}
+            </div>
+        </div>
+
+
+{% endblock %}

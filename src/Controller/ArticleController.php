@@ -29,7 +29,6 @@ class ArticleController extends AbstractController
     public function index(): Response
     {
         $articles = $this->articleRepository->findAllWithTags();
-        dump($articles);
         return $this->render('article/index.html.twig', [
             'articles' => $articles,
         ]);
@@ -66,6 +65,20 @@ class ArticleController extends AbstractController
         ]);
     }
 
+    #[Route('/rss/{id}', name: 'article_rss_show', methods: ['GET'])]
+    public function showRSS($id): Response
+    {
+        $rss = simplexml_load_file('https://www.nasa.gov/rss/dyn/breaking_news.rss');
+        // On récupère des unités de flux via channel Item
+        $rssItem = $rss->channel->item[intval($id)];
+        dump($rss);
+        dump($id);
+        
+        return $this->render('article/show_rss.html.twig', [
+            'rssItem' => $rssItem,
+        ]);
+    }
+
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}/edit', name: 'article_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Article $article, EntityManagerInterface $entityManager): Response
@@ -85,7 +98,6 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    // TODO : le faire fonctionner correctement, le bouton delete doit effacer directement
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/supprimer/{id}', name: 'article_delete', methods: ['GET', 'POST'])]
     public function delete(Request $request, Article $article, EntityManagerInterface $entityManager): Response
