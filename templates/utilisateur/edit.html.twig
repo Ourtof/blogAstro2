@@ -55,10 +55,6 @@
                         {{ form_widget(form.codePostal) }}
                         {{ form_errors(form.codePostal)}}
                 </div>
-                {# <div class="col-12 d-flex justify-content-center">
-                        {{ form_label(form.submit) }}
-                        {{ form_widget(form.submit) }}
-                </div> #}
                 <div class="col-12 d-flex justify-content-center mt-3">
                         <button class="btn btn-success">{{ button_label|default('Mettre à jour') }}</button>
                 </div>
@@ -66,6 +62,7 @@
         </div>
             {{ form_end(form) }}
     </fieldset>
-
-        {{ include('utilisateur/_delete_form.html.twig') }}
+        <div class="m-5">
+                {{ include('utilisateur/_delete_form.html.twig') }}
+        </div>
 {% endblock %}

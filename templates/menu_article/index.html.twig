@@ -8,6 +8,19 @@
 
 {% block body %}
 
+<div class="d-flex flex-wrap m-5 justify-content-center">
+    {% for rssItem in rssItems %}
+        <div class="card m-3" style="width: 15rem;">
+        {# TODO A faire quand on aura fait les images #}
+            {# <img class="card-img-top" src="..." alt="Card image cap"> #}
+            <div class="card-body">
+                <h5 class="card-title">{{ rssItem.title }}</h5>
+                <a href="{{ path('article_rss_show', { 'id': loop.index0 }) }}" class="btn btn-primary">Lire</a>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
 {# Barre de recherche #}
 <div class="d-flex justify-content-center mb-5">
     <div class="input-group rounded pt-5 w-50">
@@ -20,7 +33,6 @@
 
 <form>
     <div class="d-flex justify-content-center" id="tag-wrapper">
-    {# <div class="d-flex flex-sm-column justify-content-lg-center" id="tag-wrapper"> #}
         <label for="choose-tag" class="mx-3">Tag</label>
         <select name="choose-tag" id="choose-tag" class="form-select w-25">
             {% for tag in tagArray %}
@@ -36,7 +48,6 @@
     {% for articles in articleArray %}
         <div class="card m-3" style="width: 15rem;">
         {# TODO A faire quand on aura fait les images #}
-            {# <img class="card-img-top" src="..." alt="Card image cap"> #}
             <div class="card-body">
                 <h5 class="card-title">{{ articles.titre }}</h5>
                 <a href="{{ path('article_show', { 'id': articles.id }) }}" class="btn btn-primary">Lire</a>
@@ -50,10 +61,5 @@
 {% endblock %}
 
 {% block javascript %}
-    {# <script>
-        const getArticleByTagUrl = "{{ path('menu-article-get-article-ajax') }}";
-    </script> #}
-
-    {# <script src="{{ asset('assets/js/article-search.js') }}"></script> #}
     <script src="{{ asset('assets/js/searchbar.js') }}"></script>
 {% endblock %}
