@@ -7,61 +7,17 @@
 {% block title %}Article{% endblock %}
 
 {% block body %}
-    {# <h1>Article</h1> #}
-
-    {# <table class="table">
-        <tbody>
-            {# <tr>
-                <th>Id</th>
-                <td>{{ article.id }}</td>
-            </tr> #}
-            {# <tr>
-                <th>Titre</th>
-                <td>{{ article.titre }}</td>
-            </tr>
-            <tr>
-                <th>Contenu</th>
-                <td>{{ article.contenu }}</td>
-            </tr>
-            <tr>
-                <th>DateArticle</th>
-                <td>{{ article.dateArticle ? article.dateArticle|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Tag</th>
-                <td>{{ article.tag ? article.tag|json_encode : '' }}</td>
-            </tr>
-        </tbody>
-    </table> #}
     <div class="d-flex justify-content-center mt-5">
         <h1>
             {{ article.titre }}
         </h1>
     </div>
-    {# TODO : demander si il y a que le moyen css classique pour faire du margin plus grand #}
         <article class="margin">
             {{ article.contenu }}
         </article>
         <div class="m-5 d-flex justify-content-end">
             {{ article.dateArticle ? article.dateArticle|date('Y-m-d') : '' }}
         </div>
-
-    {# <div class="row">
-        <div class="col-1">
-            <button class="btn btn-info"><a href="{{ path('menu_article') }}">Retour au menu</a></button>
-        </div>
-        {% if is_granted("ROLE_ADMIN") %}
-            <div class="col-1">
-                <button class="btn btn-info"><a href="{{ path('article_index') }}">Retour à l'index</a></button>
-            </div>
-            <div class="col-1">
-                <button class="btn btn-info"><a href="{{ path('article_edit', {'id': article.id}) }}">Modifier</a></button>
-            </div>
-            <div class="col-1 off">
-                {{ include('article/_delete_form.html.twig') }}
-            </div>
-        {% endif %}
-    </div> #}
     <div class="row">
         <div class="col-6">
             <button class="btn btn-info"><a href="{{ path('menu_article') }}">Retour au menu</a></button>
@@ -72,6 +28,4 @@
         {% endif %}
         </div>
     </div>
-
-
 {% endblock %}
