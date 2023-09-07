@@ -39,24 +39,25 @@ class ArticleRepository extends ServiceEntityRepository
         }
     }
 
-    public function getArticleByTag(string $tag) {
-        $params["tag"] = "%" . $tag . "%";
+    public function getArticleByTag(string $tag) 
+    {
+        $qb = $this->createQueryBuilder('article')
+            ->addSelect('tag')
+            ->leftJoin('article.tag', 'tag')
+            ->where('tag.nom LIKE :tag')
+            ->setParameter('tag', "%" . $tag . "%")
+        ;
+        $query = $qb->getQuery();
 
-        $sql = "SELECT a.titre
-                FROM App\Entity\Article a
-                WHERE a.tag LIKE :tag
-                ";
-
-        return $this->getEntityManager()->createQuery($sql)->setParameters($params)->getResult();
+        return $query->execute();
     }
 
-    public function findAllWithTags() {
-        
+    public function findAllWithTags() 
+    {    
         $qb = $this->createQueryBuilder('article')
             ->addSelect('tag')
             ->leftJoin('article.tag', 'tag')
         ;
-
         $query = $qb->getQuery();
 
         return $query->execute();

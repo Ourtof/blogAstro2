@@ -19,15 +19,18 @@ class MenuArticleController extends AbstractController
     }
 
     #[Route('/menu/article', name: 'menu_article')]
-    public function index(): Response
+    public function index(Request $request): Response
     {
+        $tag = $request->query->get("choose-tag");
+        if($tag !== null) {
+            $articleArray = $this->articleRepository->getArticleByTag($tag);
+        } else {
+            $articleArray = $this->articleRepository->findAll();
+        }
         $rss = simplexml_load_file('https://www.nasa.gov/rss/dyn/breaking_news.rss');
         // On récupère des unités de flux via channel Item
         $rssItems = $rss->channel->item;
         $tagArray = $this->tagRepository->findAll();
-
-        $articleArray = $this->articleRepository->findAll();
-
         return $this->render('menu_article/index.html.twig', [
             "tagArray" => $tagArray,
             "articleArray" => $articleArray,
@@ -36,7 +39,8 @@ class MenuArticleController extends AbstractController
     }
 
     #[Route('/menu/article/get-article-AJAX', name: 'menu-article-get-article-ajax')]
-    public function getArticleByTag(Request $request) {
+    public function getArticleByTag(Request $request) 
+    {
         $data = json_decode($request->getContent());
 
         $articleArray = $this->articleRepository->getArticleByTag($data->tag);
