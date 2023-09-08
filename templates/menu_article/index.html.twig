@@ -52,6 +52,10 @@
         {# TODO A faire quand on aura fait les images #}
             <div class="card-body">
                 <h5 class="card-title">{{ articles.titre }}</h5>
+                {# {% dump articles %} #}
+                {% if articles.illustration is not null %}
+                    <img src="{{ asset('uploads/' ~ articles.illustration.nomFichier) }}" alt="{{ articles.titre }}">
+                {% endif %}
                 <a href="{{ path('article_show', { 'id': articles.id }) }}" class="btn btn-primary">Lire</a>
             </div>
         </div>

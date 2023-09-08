@@ -22,7 +22,7 @@ class MenuArticleController extends AbstractController
     public function index(Request $request): Response
     {
         $tag = $request->query->get("choose-tag");
-        if($tag !== null) {
+        if($tag !== null && $tag !== '') {
             $articleArray = $this->articleRepository->getArticleByTag($tag);
         } else {
             $articleArray = $this->articleRepository->findAll();
@@ -38,13 +38,13 @@ class MenuArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/menu/article/get-article-AJAX', name: 'menu-article-get-article-ajax')]
-    public function getArticleByTag(Request $request) 
-    {
-        $data = json_decode($request->getContent());
+    // #[Route('/menu/article/get-article-AJAX', name: 'menu-article-get-article-ajax')]
+    // public function getArticleByTag(Request $request) 
+    // {
+    //     $data = json_decode($request->getContent());
 
-        $articleArray = $this->articleRepository->getArticleByTag($data->tag);
+    //     $articleArray = $this->articleRepository->getArticleByTag($data->tag);
 
-        return new JsonResponse($articleArray);
-    }
+    //     return new JsonResponse($articleArray);
+    // }
 }

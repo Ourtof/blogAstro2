@@ -29,7 +29,7 @@ class Article
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'articles')]
     private Collection $tag;
 
-    #[ORM\ManyToOne(inversedBy: 'articles')]
+    #[ORM\ManyToOne(inversedBy: 'articles', fetch: "EAGER" )]
     private ?Illustration $illustration = null;
 
     public function __construct()
