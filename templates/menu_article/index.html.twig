@@ -35,6 +35,7 @@
     <div class="d-flex justify-content-center" id="tag-wrapper">
         <label for="choose-tag" class="mx-3">Tag</label>
         <select name="choose-tag" id="choose-tag" class="form-select w-25">
+            <option value="">Choississez votre tag</option>
             {% for tag in tagArray %}
                 <option value="{{ tag.nom }}">{{ tag.nom }}</option>
             {% endfor %}
