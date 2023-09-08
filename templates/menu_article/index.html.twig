@@ -8,11 +8,12 @@
 
 {% block body %}
 
+{# Article RSS #}
+
 <div class="d-flex flex-wrap m-5 justify-content-center">
     {% for rssItem in rssItems %}
         <div class="card m-3 text-light" style="width: 15rem;">
         {# TODO A faire quand on aura fait les images #}
-            {# <img class="card-img-top" src="..." alt="Card image cap"> #}
             <div class="card-body">
                 <h5 class="card-title">{{ rssItem.title }}</h5>
                 <a href="{{ path('article_rss_show', { 'id': loop.index0 }) }}" class="btn btn-primary">Lire</a>
@@ -31,6 +32,8 @@
     </div>
 </div>
 
+{# Recherche Tag  #}
+
 <form>
     <div class="d-flex justify-content-center" id="tag-wrapper">
         <label for="choose-tag" class="mx-3">Tag</label>
@@ -45,6 +48,8 @@
     </div>
 </form>
 
+{# Article manuel #}
+
 <div class="d-flex flex-wrap m-5 justify-content-center">
         {# TODO : pagination ? #}
     {% for articles in articleArray %}
@@ -52,11 +57,10 @@
         {# TODO A faire quand on aura fait les images #}
             <div class="card-body">
                 <h5 class="card-title">{{ articles.titre }}</h5>
-                {# {% dump articles %} #}
                 {% if articles.illustration is not null %}
-                    <img src="{{ asset('uploads/' ~ articles.illustration.nomFichier) }}" alt="{{ articles.titre }}">
+                    <img src="{{ asset('uploads/' ~ articles.illustration.nomFichier) }}" class="w-100 img-fluid" alt="{{ articles.titre }}">
                 {% endif %}
-                <a href="{{ path('article_show', { 'id': articles.id }) }}" class="btn btn-primary">Lire</a>
+                <a href="{{ path('article_show', { 'id': articles.id }) }}" class="btn btn-primary mt-3">Lire</a>
             </div>
         </div>
     {% endfor %}
