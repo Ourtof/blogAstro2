@@ -15,7 +15,8 @@
             <p class="profil">Partie utilisateur</p>
             <div class="col-12 profil">
                 <button type="button" class="btn btn-primary m-2"><a href="{{ path('utilisateur_edit', {'id': app.user.id}) }}">Modifier mon compte</a></button>
-                <button type="button" class="btn btn-primary m-2"><a href="{{ path('utilisateur_index') }}">Index utilisateur</a></button>
+                {# TODO : à supprimer si je ne trouve pas d'utilité #}
+                {# <button type="button" class="btn btn-primary m-2"><a href="{{ path('utilisateur_index') }}">Index utilisateur</a></button> #}
             </div>
         </div>
         <div class="w-25 my-5 test">
