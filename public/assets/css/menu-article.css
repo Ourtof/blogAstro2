@@ -2,6 +2,28 @@
     cursor: pointer;
 }
 
+.pagination span {
+    /* margin: 0 1%; */
+    /* border: solid 1px white; */
+    color: white;
+    /* border-radius: 5px; */
+    /* border: 1px solid #ddd; */
+}
+
+.page, current {
+    padding: 0 1%;
+}
+
+/* .pagination span a.active {
+    background-color: white;
+} */
+
+.pagination a:hover:not(.active) {
+    background-color: blue;
+    border-radius: 2px;
+    padding: 0 5px;
+}
+
 @media screen and (max-width: 992px) {
     #tag-wrapper {
         display: flex;
@@ -11,6 +33,10 @@
     }
 
     #tag-wrapper select {
-        margin: 3% 0;
+        margin: 0 3%;
+    }
+
+    #recherche {
+        margin: 2% 0;
     }
 }

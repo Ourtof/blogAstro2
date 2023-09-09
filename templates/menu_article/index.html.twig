@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheet %}
+    {{ parent() }}
     <link rel="stylesheet" href="{{ asset('assets/css/menu-article.css') }}">
 {% endblock %}
 
@@ -43,7 +44,7 @@
                 <option value="{{ tag.nom }}">{{ tag.nom }}</option>
             {% endfor %}
         </select>
-        <button type="submit" class="btn btn-info mx-5">Rechercher</button>
+        <button type="submit" class="btn btn-info mx-5" id="recherche">Rechercher</button>
         <button type="" class="btn btn-info"><a href="{{ path('menu_article') }}">Réinitialiser</a></button>
     </div>
 </form>
@@ -52,11 +53,11 @@
 
 <div class="d-flex flex-wrap m-5 justify-content-center">
         {# TODO : pagination ? #}
-    {% for articles in articleArray %}
+    {% for articles in pagination %}
         <div class="card m-3 text-light" style="width: 15rem;">
-        {# TODO A faire quand on aura fait les images #}
             <div class="card-body">
                 <h5 class="card-title">{{ articles.titre }}</h5>
+                {# pour récupérer les images et vérifier si c'est pas null  #}
                 {% if articles.illustration is not null %}
                     <img src="{{ asset('uploads/' ~ articles.illustration.nomFichier) }}" class="w-100 img-fluid" alt="{{ articles.titre }}">
                 {% endif %}
@@ -65,6 +66,7 @@
         </div>
     {% endfor %}
 </div>
+    {{ knp_pagination_render(pagination) }}
 
 <div id="result"></div>
 
