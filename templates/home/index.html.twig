@@ -1,20 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheet %}
+    {{ parent() }}
     <link rel="stylesheet" href="{{ asset('assets/css/carrousel.css') }}">
 {% endblock %}
 
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-
-{# TODO enelver les bordures #}
-<div id="container_img">
-    <div id="carrousel">
-        <div id="panneau">
+    <div id="container_img">
+        <div id="carrousel">
+            <div id="panneau">
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}
 
 {# js pour Carrousel #}
