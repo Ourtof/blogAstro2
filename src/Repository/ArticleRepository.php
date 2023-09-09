@@ -39,6 +39,7 @@ class ArticleRepository extends ServiceEntityRepository
         }
     }
 
+    // Query pour la recherche de tag
     public function getArticleByTag(string $tag) 
     {
         $qb = $this->createQueryBuilder('article')
@@ -52,6 +53,7 @@ class ArticleRepository extends ServiceEntityRepository
         return $query->execute();
     }
 
+    // Query pour la recherche d'article 
     public function findAllWithTags() 
     {    
         $qb = $this->createQueryBuilder('article')
@@ -61,5 +63,14 @@ class ArticleRepository extends ServiceEntityRepository
         $query = $qb->getQuery();
 
         return $query->execute();
+    }
+
+    // Query pour la pagination 
+    public function paginationQuery()
+    {
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.id', 'ASC')
+            ->getQuery()
+            ;
     }
 }
