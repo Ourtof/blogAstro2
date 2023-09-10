@@ -1,31 +1,27 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheet %}
-    <link rel="stylesheet" href="{{ asset('assets/css/article.css') }}">
+    {{ parent() }}
 {% endblock %}
 
 {% block title %}Article{% endblock %}
 
 {% block body %}
-    <div class="d-flex justify-content-center mt-5">
-        <h1>
-            {{ article.titre }}
-        </h1>
+    <h2 class="d-flex justify-content-center mt-5">
+        {{ article.titre }}
+    </h2>
+    <article class="margin">
+        {{ article.contenu }}
+    </article>
+    <div class="m-5 d-flex justify-content-end text-light">
+        {{ article.dateArticle ? article.dateArticle|date('Y-m-d') : '' }}
     </div>
-        <article class="margin">
-            {{ article.contenu }}
-        </article>
-        <div class="m-5 d-flex justify-content-end">
-            {{ article.dateArticle ? article.dateArticle|date('Y-m-d') : '' }}
-        </div>
-    <div class="row">
-        <div class="col-6">
-            <button class="btn btn-info"><a href="{{ path('menu_article') }}">Retour au menu</a></button>
-        {% if is_granted("ROLE_ADMIN") %}
-            <button class="btn btn-info"><a href="{{ path('article_index') }}">Retour à l'index</a></button>
-            <button class="btn btn-info"><a href="{{ path('article_edit', {'id': article.id}) }}">Modifier</a></button>
-            {{ include('article/_delete_form.html.twig') }}
-        {% endif %}
-        </div>
+    <div class="col-6">
+        <button class="btn btn-info"><a href="{{ path('menu_article') }}">Retour au menu</a></button>
+    {% if is_granted("ROLE_ADMIN") %}
+        <button class="btn btn-info"><a href="{{ path('article_index') }}">Retour à l'index</a></button>
+        <button class="btn btn-info"><a href="{{ path('article_edit', {'id': article.id}) }}">Modifier</a></button>
+        {{ include('article/_delete_form.html.twig') }}
+    {% endif %}
     </div>
 {% endblock %}

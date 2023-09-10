@@ -38,7 +38,6 @@ class UtilisateurController extends AbstractController
                 $utilisateur,
                 $utilisateur->getPassword()
             );
-            // TODO: à tester sans 'setPassword' pour voir s'il stock bien le password dans la base
             $utilisateur->setPassword($hashedPassword);
 
             $this->em->persist($utilisateur);
