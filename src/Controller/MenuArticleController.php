@@ -36,7 +36,7 @@ class MenuArticleController extends AbstractController
 
         // pagination 
         $pagination = $paginator->paginate(
-            $tchis->articleRepository->paginationQuery(),
+            $this->articleRepository->paginationQuery(),
             $request->query->get('page', 1),
         );
 
