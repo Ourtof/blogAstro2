@@ -19,7 +19,7 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        for ($i = 0; $i < 50; $i++) { 
+        for ($i = 0; $i < 20; $i++) { 
             $article = new Article();
             $article->setTitre($this->faker->word())
                 ->setContenu($this->faker->text(500));

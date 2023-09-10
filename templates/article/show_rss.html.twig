@@ -18,12 +18,10 @@
         </article>
         <div class="m-5 d-flex justify-content-end">
         </div>
-        <div class="row">
             <div class="col-6">
                 <button class="btn btn-info m-2"><a href="{{ path('menu_article') }}">Retour au menu</a></button>
             {% if is_granted("ROLE_ADMIN") %}
                 <button class="btn btn-info m-2"><a href="{{ path('article_index') }}">Retour à l'index</a></button>
             {% endif %}
             </div>
-        </div>
 {% endblock %}
