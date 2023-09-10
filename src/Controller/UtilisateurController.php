@@ -76,7 +76,7 @@ class UtilisateurController extends AbstractController
             $this->em->persist($utilisateur);
             $this->em->flush();
 
-            return $this->redirectToRoute('admin');
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('utilisateur/edit.html.twig', [
