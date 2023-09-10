@@ -12,16 +12,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 #[Route('/article')]
 class ArticleController extends AbstractController
 {
-
     public function __construct(
         private ArticleRepository $articleRepository,
         private TagRepository $tagRepository,
+        private EntityManagerInterface $entityManager
     ) {
-
     }
 
     #[IsGranted('ROLE_ADMIN')]
@@ -36,7 +36,7 @@ class ArticleController extends AbstractController
 
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/new', name: 'article_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request): Response
     {
         $article = new Article();
         $tag = $this->tagRepository->findAll();
@@ -44,16 +44,16 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($article);
-            $entityManager->flush();
+            $this->entityManager->persist($article);
+            $this->entityManager->flush();
 
-            return $this->redirectToRoute('article_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('article_index');
         }
 
         return $this->render('article/new.html.twig', [
             'article' => $article,
             'form' => $form,
-            'tag' => $tag,
+            'tag' => $tag
         ]);
     }
 
@@ -66,7 +66,7 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/rss/{id}', name: 'article_rss_show', methods: ['GET'])]
-    public function showRSS($id): Response
+    public function showRSS(int $id): Response
     {
         $rss = simplexml_load_file('https://www.nasa.gov/rss/dyn/breaking_news.rss');
         // On récupère des unités de flux via channel Item
@@ -81,15 +81,15 @@ class ArticleController extends AbstractController
 
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}/edit', name: 'article_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Article $article, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Article $article): Response|RedirectResponse
     {
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $this->entityManager->flush();
 
-            return $this->redirectToRoute('article_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('article_index');
         }
 
         return $this->render('article/edit.html.twig', [
@@ -100,15 +100,13 @@ class ArticleController extends AbstractController
 
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/supprimer/{id}', name: 'article_delete', methods: ['GET', 'POST'])]
-    public function delete(Request $request, Article $article, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Article $article): RedirectResponse
     {
         if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($article);
-            $entityManager->flush();
+            $this->entityManager->remove($article);
+            $this->entityManager->flush();
         }
         // $this->articleRepository->remove($article, true);
-
-        // return $this->redirectToRoute('article_index', [], Response::HTTP_SEE_OTHER);
         return $this->redirectToRoute('article_index');
     }
 }

@@ -13,15 +13,19 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class RegistrationController extends AbstractController
 {
+    public function __construct(
+        private EntityManagerInterface $entityManager
+    ) {
+    }
+
     #[Route('/inscription', name: 'inscription')]
-    public function inscription(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function inscription(Request $request, UserPasswordHasherInterface $userPasswordHasher): Response
     {
         $user = new Utilisateur();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
@@ -29,8 +33,8 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
             // do anything else you need here, like send an email
 
             return $this->redirectToRoute('home');

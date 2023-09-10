@@ -14,6 +14,10 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/tag')]
 class TagController extends AbstractController
 {
+    public function __construct(
+        private EntityManagerInterface $entityManager
+    ) {
+    }
     #[Route('/', name: 'tag_index', methods: ['GET'])]
     public function index(TagRepository $tagRepository): Response
     {
@@ -23,17 +27,17 @@ class TagController extends AbstractController
     }
 
     #[Route('/new', name: 'tag_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request): Response
     {
         $tag = new Tag();
         $form = $this->createForm(TagType::class, $tag);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($tag);
-            $entityManager->flush();
+            $this->entityManager->persist($tag);
+            $this->entityManager->flush();
 
-            return $this->redirectToRoute('tag_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('tag_index');
         }
 
         return $this->render('tag/new.html.twig', [
@@ -51,15 +55,15 @@ class TagController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'tag_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Tag $tag, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Tag $tag): Response
     {
         $form = $this->createForm(TagType::class, $tag);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $this->entityManager->flush();
 
-            return $this->redirectToRoute('tag_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('tag_index');
         }
 
         return $this->render('tag/edit.html.twig', [
@@ -69,13 +73,13 @@ class TagController extends AbstractController
     }
 
     #[Route('/{id}', name: 'tag_delete', methods: ['POST'])]
-    public function delete(Request $request, Tag $tag, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Tag $tag): Response
     {
         if ($this->isCsrfTokenValid('delete'.$tag->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($tag);
-            $entityManager->flush();
+            $this->entityManager->remove($tag);
+            $this->entityManager->flush();
         }
 
-        return $this->redirectToRoute('tag_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('tag_index');
     }
 }

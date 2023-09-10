@@ -6,7 +6,6 @@ use App\Entity\Illustration;
 use App\Form\IllustrationType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\IllustrationRepository;
-use Symfony\Component\DependencyInjection\ParameterBag\ContainerBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +16,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/illustration')]
 class IllustrationController extends AbstractController
 {
+    public function __construct(
+        private EntityManagerInterface $entityManager
+    ) {
+    }
+
     #[Route('/', name: 'illustration_index', methods: ['GET'])]
     public function index(IllustrationRepository $illustrationRepository): Response
     {
@@ -26,7 +30,7 @@ class IllustrationController extends AbstractController
     }
 
     #[Route('/new', name: 'illustration_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, #[Autowire('%uploads_dir%')] string $uploadsDir): Response
+    public function new(Request $request, #[Autowire('%uploads_dir%')] string $uploadsDir): Response
     {
         $illustration = new Illustration();
         $form = $this->createForm(IllustrationType::class, $illustration);
@@ -41,10 +45,10 @@ class IllustrationController extends AbstractController
                 $illustration->setNomFichier($filename);
             }
 
-            $entityManager->persist($illustration);
-            $entityManager->flush();
+            $this->entityManager->persist($illustration);
+            $this->entityManager->flush();
 
-            return $this->redirectToRoute('illustration_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('illustration_index');
         }
 
         return $this->render('illustration/new.html.twig', [
@@ -62,15 +66,15 @@ class IllustrationController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'illustration_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Illustration $illustration, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Illustration $illustration): Response
     {
         $form = $this->createForm(IllustrationType::class, $illustration);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $this->entityManager->flush();
 
-            return $this->redirectToRoute('illustration_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('illustration_index');
         }
 
         return $this->render('illustration/edit.html.twig', [
@@ -80,18 +84,16 @@ class IllustrationController extends AbstractController
     }
 
     #[Route('/{id}', name: 'illustration_delete', methods: ['POST'])]
-    public function delete(Request $request, Illustration $illustration, EntityManagerInterface $entityManager, #[Autowire('%uploads_dir%')] string $uploadsDir): Response
+    public function delete(Request $request, Illustration $illustration, #[Autowire('%uploads_dir%')] string $uploadsDir): Response
     {
         if ($this->isCsrfTokenValid('delete'.$illustration->getId(), $request->request->get('_token'))) {
             $filesystem = new Filesystem();
             $filesystem->remove($uploadsDir . "/" . $illustration->getNomFichier());
             
-            $entityManager->remove($illustration);
-            $entityManager->flush();
+            $this->entityManager->remove($illustration);
+            $this->entityManager->flush();
         }
         
-        
-
-        return $this->redirectToRoute('illustration_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('illustration_index');
     }
 }

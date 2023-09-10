@@ -14,9 +14,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 #[Route('/contact')]
 class ContactController extends AbstractController
-{
-    #[Route('/index', name: 'contact_index', methods: ['GET'])]
+{   
+    public function __construct(
+        private EntityManagerInterface $entityManager
+    ) {
+    }
+
     #[IsGranted('ROLE_ADMIN')]
+    #[Route('/index', name: 'contact_index', methods: ['GET'])]
     public function index(ContactRepository $contactRepository): Response
     {
         return $this->render('contact/index.html.twig', [
@@ -25,17 +30,17 @@ class ContactController extends AbstractController
     }
 
     #[Route('/new', name: 'contact_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request): Response
     {
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($contact);
-            $entityManager->flush();
+            $this->entityManager->persist($contact);
+            $this->entityManager->flush();
 
-            return $this->redirectToRoute('home', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('contact/new.html.twig', [
@@ -53,15 +58,15 @@ class ContactController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'contact_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Contact $contact, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Contact $contact): Response
     {
         $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $this->entityManager->flush();
 
-            return $this->redirectToRoute('contact_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('contact_index');
         }
 
         return $this->render('contact/edit.html.twig', [
@@ -71,13 +76,13 @@ class ContactController extends AbstractController
     }
 
     #[Route('/{id}', name: 'contact_delete', methods: ['POST'])]
-    public function delete(Request $request, Contact $contact, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Contact $contact): Response
     {
         if ($this->isCsrfTokenValid('delete'.$contact->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($contact);
-            $entityManager->flush();
+            $this->entityManager->remove($contact);
+            $this->entityManager->flush();
         }
 
-        return $this->redirectToRoute('contact_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('contact_index');
     }
 }

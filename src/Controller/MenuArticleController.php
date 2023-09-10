@@ -19,22 +19,24 @@ class MenuArticleController extends AbstractController
     }
 
     #[Route('/menu/article', name: 'menu_article')]
-    public function index(Request $request, PaginatorInterface $paginator, ArticleRepository $articleRepository): Response
+    public function index(Request $request, PaginatorInterface $paginator): Response
     {
+        $articleArray = $this->articleRepository->findAll();
+
         $tag = $request->query->get("choose-tag");
-        if($tag !== null && $tag !== '') {
+        if (!is_null($tag) && !empty($tag)) {
             $articleArray = $this->articleRepository->getArticleByTag($tag);
-        } else {
-            $articleArray = $this->articleRepository->findAll();
         }
+
         $rss = simplexml_load_file('https://www.nasa.gov/rss/dyn/breaking_news.rss');
+
         // On récupère des unités de flux via channel Item
         $rssItems = $rss->channel->item;
         $tagArray = $this->tagRepository->findAll();
 
         // pagination 
         $pagination = $paginator->paginate(
-            $articleRepository->paginationQuery(),
+            $tchis->articleRepository->paginationQuery(),
             $request->query->get('page', 1),
         );
 

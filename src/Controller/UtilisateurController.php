@@ -26,35 +26,9 @@ class UtilisateurController extends AbstractController
     ) {
     }
 
-    #[Route('/index', name: 'utilisateur_index', methods: ['GET'])]
-    public function index(Session $session): Response
-    {
-        //besoin de droits admin
-        $utilisateur = $this->getUser();
-        
-        if(is_null($utilisateur)) {
-                $session->set("message", "Merci de vous connecter");
-                return $this->redirectToRoute('login');
-            } else if(in_array('ROLE_ADMIN', $utilisateur->getRoles())){
-                return $this->render('utilisateur/index.html.twig', [
-                    'utilisateurs' => $this->utilisateurRepository->findAll(),
-                ]);
-            }
-
-        return $this->redirectToRoute('home');
-    }
-
     #[Route('/new', name: 'utilisateur_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, UserPasswordHasherInterface $passwordHasher, Session $session): Response|RedirectResponse
+    public function new(Request $request, UserPasswordHasherInterface $passwordHasher): Response|RedirectResponse
     {
-
-        //test de sécurité, un utilisateur connecté ne peut pas s'inscrire
-        $utilisateurInterface = $this->getUser();
-        if ($utilisateurInterface) {
-            $session->set("message", "Vous ne pouvez pas créer un compte lorsque vous êtes connecté");
-            return $this->redirectToRoute('membre');
-        }
-
         $utilisateur = new Utilisateur();
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
         $form->handleRequest($request);
@@ -64,6 +38,8 @@ class UtilisateurController extends AbstractController
                 $utilisateur,
                 $utilisateur->getPassword()
             );
+            // TODO: à tester sans 'setPassword' pour voir s'il stock bien le password dans la base
+            $utilisateur->setPassword($hashedPassword);
 
             $this->em->persist($utilisateur);
             $this->em->flush();
@@ -86,15 +62,8 @@ class UtilisateurController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'utilisateur_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, UserPasswordHasherInterface $passwordHasher, Session $session, $id): Response|RedirectResponse
+    public function edit(Request $request, UserPasswordHasherInterface $passwordHasher, Utilisateur $utilisateur): Response|RedirectResponse
     {
-        $utilisateur = $this->utilisateurRepository->find($this->getUser());
-
-        if ($utilisateur->getId() != $id) {
-            // un utilisateur ne peut pas en modifier un autre
-            $session->set("message", "Vous ne pouvez pas modifier cet utilisateur");
-            return $this->redirectToRoute('home');
-        }
         $form = $this->createForm(UtilisateurType::class, $utilisateur);
         $form->handleRequest($request);
 
@@ -103,6 +72,8 @@ class UtilisateurController extends AbstractController
                 $utilisateur,
                 $utilisateur->getPassword()
             );
+            $utilisateur->setPassword($hashedPassword);
+
             $this->em->persist($utilisateur);
             $this->em->flush();
 
@@ -116,18 +87,8 @@ class UtilisateurController extends AbstractController
     }
 
     #[Route('/{id}', name: 'utilisateur_delete', methods: ['POST'])]
-    public function delete(Request $request, Utilisateur $utilisateur, UtilisateurRepository $utilisateurRepository, Session $session, $id): Response|RedirectResponse
+    public function delete(Request $request, Utilisateur $utilisateur): Response|RedirectResponse
     {
-        $utilisateur = $utilisateurRepository->find($this->getUser());
-
-        if ($utilisateur->getId() != $id) {
-            // un utilisateur ne peut pas en supprimer un autre
-            $session->set("message", "Vous ne pouvez pas supprimer cet utilisateur");
-            return $this->redirectToRoute('membre', [
-                'utilisateur' => $utilisateur,
-            ]);
-        }
-
         if ($this->isCsrfTokenValid('delete' . $utilisateur->getId(), $request->request->get('_token'))) {
             $this->em->remove($utilisateur);
             $this->em->flush();
