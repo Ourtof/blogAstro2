@@ -55,6 +55,8 @@ a {
     border-radius: 1em;
 }
 
+/* page profil */
+
 .profil {
     display: flex;
     justify-content: center;
@@ -76,13 +78,12 @@ fieldset {
     border-radius: 1em;
 }
 
-/* legend {
-    width: 75%;
-} */
+/* HEADER  */
 
-/* body {
-    margin: 0;
-    min-height: 100vh;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-} */
+#navbarCollapse {
+    background-color: rgb(12, 12, 89);
+}
+
+.right {
+    margin-right: 4%;
+}

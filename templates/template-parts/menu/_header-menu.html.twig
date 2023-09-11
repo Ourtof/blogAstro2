@@ -1,36 +1,33 @@
 <div class="sticky-top header-footer">
-    <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg">
         <h1><a class="nav-link mx-5" href="{{ path('home') }}">BlogAstro</a></h1>
-            <button class="col-md-none navbar-toggler bg-white" type="button" data-bs-target="#navbarCollapse" data-bs-toggle="collapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-lg-flex justify-content-end text-end" id="navbarCollapse">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link text-light" href="{{ path('home') }}">Accueil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="{{ path('menu_article') }}">Article</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="{{ path('contact_new') }}">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="{{ path('cgu') }}">CGU</a>
-                    </li>
-                    <li class="nav-item">
-                        {% if is_granted("ROLE_ADMIN") %}
-                            <a class="nav-link text-light d-none d-lg-block" href="{{ path('admin') }}"><i class="bi bi-person-circle"></i></a>
-                            <a class="nav-link text-light d-lg-none" href="{{ path('admin') }}">profil</a>
-                        {% else %}
-                        {# {% if is_granted("ROLE_USER") %} #}
-                            <a class="nav-link text-light d-none d-lg-block" href="{{ path('membre') }}"><i class="bi bi-person-circle"></i></a>
-                            <a class="nav-link text-light d-lg-none" href="{{ path('membre') }}">profil</a>
-                        {% endif %}
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
+        <button class="col-md-none navbar-toggler bg-white right" type="button" data-bs-target="#navbarCollapse" data-bs-toggle="collapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-lg-flex justify-content-end text-end" id="navbarCollapse">
+            <ul class="navbar-nav">
+                <li class="nav-item active right">
+                    <a class="nav-link text-light" href="{{ path('home') }}">Accueil</a>
+                </li>
+                <li class="nav-item right">
+                    <a class="nav-link text-light" href="{{ path('menu_article') }}">Article</a>
+                </li>
+                <li class="nav-item right">
+                    <a class="nav-link text-light" href="{{ path('contact_new') }}">Contact</a>
+                </li>
+                <li class="nav-item right">
+                    <a class="nav-link text-light" href="{{ path('cgu') }}">CGU</a>
+                </li>
+                <li class="nav-item right">
+                    {% if is_granted("ROLE_ADMIN") %}
+                        <a class="nav-link text-light d-none d-lg-block" href="{{ path('admin') }}"><i class="bi bi-person-circle"></i></a>
+                        <a class="nav-link text-light d-lg-none" href="{{ path('admin') }}">profil</a>
+                    {% else %}
+                        <a class="nav-link text-light d-none d-lg-block" href="{{ path('membre') }}"><i class="bi bi-person-circle"></i></a>
+                        <a class="nav-link text-light d-lg-none" href="{{ path('membre') }}">profil</a>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </nav>
 </div>
