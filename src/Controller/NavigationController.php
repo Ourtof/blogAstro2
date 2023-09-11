@@ -19,23 +19,23 @@ class NavigationController extends AbstractController
 	}
 
     #[IsGranted('ROLE_USER')]
-	#[Route('/membre', name: 'membre')]
+	#[Route('/role/membre', name: 'membre')]
 	public function membre()
 	{
 			
-		return $this->render('/membre.html.twig', [
+		return $this->render('/role/membre.html.twig', [
 			'utilisateur' => $this->getUser()
 		]);
 	}
 
     #[IsGranted('ROLE_ADMIN')]
-	#[Route('/admin', name: 'admin')]
+	#[Route('/role/admin', name: 'admin')]
 	public function admin()
 	{
 
 		$utilisateur = $this->getUser();
 
-		return $this->render('admin.html.twig', [
+		return $this->render('role/admin.html.twig', [
 			'utilisateurs' => $this->utilisateurRepository->findAll(),
 			'utilisateur' => $this->getUser()
 		]);
