@@ -25,8 +25,11 @@ class MenuArticleController extends AbstractController
 
         $tag = $request->query->get("choose-tag");
         if (!is_null($tag) && !empty($tag)) {
+            // if ($tag !== null && $tag !== '') {
             $articleArray = $this->articleRepository->getArticleByTag($tag);
         }
+
+        dump($articleArray);
 
         $rss = simplexml_load_file('https://www.nasa.gov/rss/dyn/breaking_news.rss');
 
@@ -36,7 +39,7 @@ class MenuArticleController extends AbstractController
 
         // pagination 
         $pagination = $paginator->paginate(
-            $this->articleRepository->paginationQuery(),
+            $articleArray,
             $request->query->get('page', 1),
         );
 
