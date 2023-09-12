@@ -29,8 +29,6 @@ class MenuArticleController extends AbstractController
             $articleArray = $this->articleRepository->getArticleByTag($tag);
         }
 
-        dump($articleArray);
-
         $rss = simplexml_load_file('https://www.nasa.gov/rss/dyn/breaking_news.rss');
 
         // On récupère des unités de flux via channel Item
