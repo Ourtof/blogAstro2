@@ -7,15 +7,13 @@
 
     <h3 class="profil">Bonjour {{ app.user.pseudo }} voici ton espace personnel</h3>
 
-        <div class="w-25 my-5 part_profile">
+        <div class="w-50 my-5 part_profile">
             <p class="profil">Partie utilisateur</p>
             <div class="col-12 profil">
                 <button type="button" class="btn btn-primary m-2"><a href="{{ path('utilisateur_edit', {'id': app.user.id}) }}">Modifier mon compte</a></button>
-                {# TODO : à supprimer si je ne trouve pas d'utilité #}
-                {# <button type="button" class="btn btn-primary m-2"><a href="{{ path('utilisateur_index') }}">Index utilisateur</a></button> #}
             </div>
         </div>
-        <div class="w-25 my-5 part_profile">
+        <div class="w-50 my-5 part_profile">
             <p class="profil">Partie rédaction</p>
             <div class="col-12 profil">
                 <button type="button" class="btn btn-primary m-2"><a href="{{ path('article_index') }}">Index article</a></button>
@@ -23,7 +21,7 @@
                 <button type="button" class="btn btn-primary m-2"><a href="{{ path('tag_index') }}">Voir tag</a></button>
             </div>
         </div>
-        <div class="w-25 my-5 part_profile">
+        <div class="w-50 my-5 part_profile">
             <p class="profil">Partie administration</p>
             <div class="col-12 profil">
                 <button type="button" class="btn btn-primary m-2"><a href="{{ path('contact_index') }}">Voir message</a></button>

@@ -24,13 +24,19 @@ h2, h3, p, article {
     color: white;
 }
 
-.card {
-    background-color: grey;
-}
-
 a {
     text-decoration: none;
     color: white;
+}
+
+/* HEADER-FOOTER  */
+
+#navbarCollapse {
+    background-color: rgb(12, 12, 89);
+}
+
+.right {
+    margin-right: 4%;
 }
 
 .header-footer {
@@ -47,19 +53,27 @@ a {
     height: 13vh;
 }
 
+/* menu article  */
+
+.card {
+    background-color: grey;
+}
+
+/* page profil */
+
 .part_profile {
     margin: auto;
     width: 50%;
     padding: 1em;
     border: 1px solid #CCC;
     border-radius: 1em;
+    text-align: center;
 }
-
-/* page profil */
 
 .profil {
     display: flex;
     justify-content: center;
+    text-align: center;
 }
 
 /* Encadrement margin présentation */
@@ -68,7 +82,7 @@ a {
     margin: 8% 20% 0 20%;
 }
 
-/* champ form contact, utilisateur */
+/* champ form contact, utilisateur, profil */
 
 fieldset {
     margin: auto;
@@ -78,12 +92,13 @@ fieldset {
     border-radius: 1em;
 }
 
-/* HEADER  */
+@media screen and (max-width: 992px) {
 
-#navbarCollapse {
-    background-color: rgb(12, 12, 89);
-}
-
-.right {
-    margin-right: 4%;
+    fieldset {
+        width: 75%;
+    }
+    
+    .profil {
+        flex-direction: column;
+    }
 }
