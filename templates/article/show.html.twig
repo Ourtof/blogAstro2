@@ -3,15 +3,20 @@
 {% block title %}Article{% endblock %}
 
 {% block body %}
+    {% if article.illustration is not null %}
+        <div class="parallax" style="background-image: url('{{ asset('uploads/' ~ article.illustration.nomFichier) }}')"></div>
+    {% endif %}
     <h2 class="d-flex justify-content-center mt-5">
         {{ article.titre }}
     </h2>
+
     <article class="margin">
         {{ article.contenu }}
     </article>
     <div class="m-5 d-flex justify-content-end text-light">
         {{ article.dateArticle ? article.dateArticle|date('Y-m-d') : '' }}
     </div>
+    
     <div class="col-6">
         <button class="btn btn-info"><a href="{{ path('menu_article') }}">Retour au menu</a></button>
     {% if is_granted("ROLE_ADMIN") %}

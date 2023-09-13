@@ -59,6 +59,16 @@ a {
     background-color: grey;
 }
 
+/* article  */
+
+.parallax {
+    height: 80vh;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
 /* page profil */
 
 .part_profile {

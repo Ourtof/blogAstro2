@@ -56,7 +56,7 @@
         <div class="card m-3 text-light" style="width: 15rem;">
             {# pour récupérer les images et vérifier si c'est pas null  #}
             {% if articles.illustration is not null %}
-                <img src="{{ asset('uploads/' ~ articles.illustration.nomFichier) }}" class="w-100 img-fluid object-fit-cover" alt="{{ articles.titre }}">
+                <img src="{{ asset('uploads/' ~ articles.illustration.nomFichier) }}" class="w-100 img-fluid" alt="{{ articles.titre }}">
             {% endif %}
             <div class="card-body">
                 <h5 class="card-title">{{ articles.titre }}</h5>

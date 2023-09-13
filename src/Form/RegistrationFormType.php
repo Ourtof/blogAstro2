@@ -70,25 +70,23 @@ class RegistrationFormType extends AbstractType
                     new Assert\Length(['min' => 2, 'max' => 50])
                 ]
             ])
-            // TODO : dynamiser le max pour la date max + constraint
-            ->add('dateNaissance', DateType::class, [
+            ->add('dateNaissance', DateType::class, [ 
                 'attr' => [
                     'class' => 'form-control',
                     'minlength' => '2',
                     'maxlength' => '50',
-                    'min' => '1900-01-01',
-                    'max' => '2024-01-01',
                 ],
                 'label' => 'Date de naissance',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
-                'widget' => 'single_text',
+                'widget' => 'choice',
                 'constraints' => [
                     new Assert\NotBlank([
                         'message' => 'Veuillez entrer une date de naissance.'
                     ])
-                ]
+                    ],
+                    'years' => range(date('Y') - 70, date('Y') - 10),
             ])
             ->add('adresse', TextType::class, [
                 'attr' => [
