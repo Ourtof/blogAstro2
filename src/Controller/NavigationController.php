@@ -32,9 +32,6 @@ class NavigationController extends AbstractController
 	#[Route('/role/admin', name: 'admin')]
 	public function admin()
 	{
-
-		$utilisateur = $this->getUser();
-
 		return $this->render('role/admin.html.twig', [
 			'utilisateurs' => $this->utilisateurRepository->findAll(),
 			'utilisateur' => $this->getUser()

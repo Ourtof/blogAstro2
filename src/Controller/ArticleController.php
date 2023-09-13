@@ -66,7 +66,7 @@ class ArticleController extends AbstractController
     }
 
     #[Route('/rss/{id}', name: 'article_rss_show', methods: ['GET'])]
-    public function showRSS(int $id): Response
+    public function showRSS(int $id, Article $article): Response
     {
         $rss = simplexml_load_file('https://www.nasa.gov/rss/dyn/breaking_news.rss');
         // On récupère des unités de flux via channel Item
@@ -74,6 +74,7 @@ class ArticleController extends AbstractController
         
         return $this->render('article/show_rss.html.twig', [
             'rssItem' => $rssItem,
+            'article' => $article,
         ]);
     }
 
