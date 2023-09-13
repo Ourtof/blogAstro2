@@ -39,7 +39,6 @@ class IllustrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // S'assure qu'on récupère bien les données dans le fichier
             if ($nomFichier = $form['nomFichier']->getData()) {
-                dump($uploadsDir);
                 $filename = bin2hex(random_bytes(6)) . '.' . $nomFichier->guessExtension();
                 $nomFichier->move($uploadsDir, $filename);
                 $illustration->setNomFichier($filename);

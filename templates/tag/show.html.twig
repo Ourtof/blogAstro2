@@ -8,10 +8,6 @@
             {{ tag.nom }}
         </h1>
     </div>
-    {# TODO : demander si il y a que le moyen css classique pour faire du margin plus grand #}
-
-
-    {# TODO demander si c'est une bonne idée d'enlever ce bouton pour pas que les membres le voit #}
     {% if is_granted("ROLE_ADMIN") %}
         <button class="btn btn-info"><a href="{{ path('tag_index') }}">Retour</a></button>
         <button class="btn btn-info"><a href="{{ path('tag_edit', {'id': tag.id}) }}">Modifier</a></button>
