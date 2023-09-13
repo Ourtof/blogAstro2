@@ -11,7 +11,6 @@
         <div class="col-6">
         {% if is_granted("ROLE_ADMIN") %}
             <button class="btn btn-info mt-3"><a href="{{ path('illustration_index') }}">Retour à l'index</a></button>
-            <button class="btn btn-info mt-3"><a href="{{ path('illustration_edit', {'id': illustration.id}) }}">Modifier</a></button>
             {{ include('illustration/_delete_form.html.twig') }}
         {% endif %}
         </div>
