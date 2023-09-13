@@ -52,12 +52,12 @@
 <div class="d-flex flex-wrap m-5 justify-content-center">
     {% for articles in pagination %}
         <div class="card m-3 text-light" style="width: 15rem;">
+            {# pour récupérer les images et vérifier si c'est pas null  #}
+            {% if articles.illustration is not null %}
+                <img src="{{ asset('uploads/' ~ articles.illustration.nomFichier) }}" class="w-100 img-fluid object-fit-cover" alt="{{ articles.titre }}">
+            {% endif %}
             <div class="card-body">
                 <h5 class="card-title">{{ articles.titre }}</h5>
-                {# pour récupérer les images et vérifier si c'est pas null  #}
-                {% if articles.illustration is not null %}
-                    <img src="{{ asset('uploads/' ~ articles.illustration.nomFichier) }}" class="w-100 img-fluid" alt="{{ articles.titre }}">
-                {% endif %}
                 <a href="{{ path('article_show', { 'id': articles.id }) }}" class="btn btn-primary mt-3">Lire</a>
             </div>
         </div>
