@@ -26,20 +26,6 @@
 
 		<div class="row">
 			<div class="col-12">
-				{#
-				* *Version Alban
-				{{ form_label(form.adresse_mail)}}
-				<input
-					name="{{ field_name(form.adresse_mail) }}"
-					{% if app.user %}
-						value="{{ field_value(form.adresse_mail) }}"
-					{% endif %}
-					placeholder="{{ field_label(form.adresse_mail) }}"
-					class="form-control"
-				/>
-				#}
-
-				{# * *Version Ourtof #}
 				{{ form_row(form.adresse_mail) }}
 			</div>
 		</div>

@@ -16,9 +16,6 @@
                     <a class="nav-link text-light" href="{{ path('contact_new') }}">Contact</a>
                 </li>
                 <li class="nav-item right">
-                    <a class="nav-link text-light" href="{{ path('cgu') }}">CGU</a>
-                </li>
-                <li class="nav-item right">
                     {% if is_granted("ROLE_ADMIN") %}
                         <a class="nav-link text-light d-none d-lg-block" href="{{ path('admin') }}"><i class="bi bi-person-circle"></i></a>
                         <a class="nav-link text-light d-lg-none" href="{{ path('admin') }}">profil</a>
