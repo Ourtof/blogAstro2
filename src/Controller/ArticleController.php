@@ -71,8 +71,6 @@ class ArticleController extends AbstractController
         $rss = simplexml_load_file('https://www.nasa.gov/rss/dyn/breaking_news.rss');
         // On récupère des unités de flux via channel Item
         $rssItem = $rss->channel->item[intval($id)];
-        dump($rss);
-        dump($id);
         
         return $this->render('article/show_rss.html.twig', [
             'rssItem' => $rssItem,
