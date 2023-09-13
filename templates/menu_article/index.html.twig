@@ -9,6 +9,7 @@
 {% block body %}
 
 {# Article RSS #}
+<h2 class="text-center mt-4">News</h2>
 
 <div class="d-flex flex-wrap m-5 justify-content-center">
     {% for rssItem in rssItems %}
@@ -49,6 +50,7 @@
 
 {# Article manuel #}
 
+<h2 class="text-center mt-5">Article du site</h2>
 <div class="d-flex flex-wrap m-5 justify-content-center">
     {% for articles in pagination %}
         <div class="card m-3 text-light" style="width: 15rem;">
