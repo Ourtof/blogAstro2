@@ -11,32 +11,32 @@
 
         <div class="d-flex justify-content-center">
             <div class="row w-75">
-                <div class="col-12">
+                <div class="col-12 w-50">
                         {{ form_label(registrationForm.prenom) }}
                         {{ form_widget(registrationForm.prenom) }}
                         {{ form_errors(registrationForm.prenom) }}
                 </div>
-                <div class="col-12">
+                <div class="col-12 w-50">
                         {{ form_label(registrationForm.nom) }}
                         {{ form_widget(registrationForm.nom) }}
                         {{ form_errors(registrationForm.nom) }}
                 </div>
-                <div class="col-12">
+                <div class="col-12 w-50">
                         {{ form_label(registrationForm.pseudo) }}
                         {{ form_widget(registrationForm.pseudo) }}
                         {{ form_errors(registrationForm.pseudo) }}
                 </div>
-                <div class="col-12">
+                <div class="col-12 w-75">
                         {{ form_label(registrationForm.email) }}
                         {{ form_widget(registrationForm.email) }}
                         {{ form_errors(registrationForm.email)}}
                 </div>
-                <div class="col-12">
+                <div class="col-12 w-50">
                         {{ form_label(registrationForm.plainPassword) }}
                         {{ form_widget(registrationForm.plainPassword) }}
                         {{ form_errors(registrationForm.plainPassword)}}
                 </div>
-                <div class="col-12">
+                <div class="col-12 w-25">
                         {{ form_label(registrationForm.dateNaissance) }}
                         {{ form_widget(registrationForm.dateNaissance) }}
                         {{ form_errors(registrationForm.dateNaissance) }}
@@ -46,15 +46,15 @@
                         {{ form_widget(registrationForm.adresse) }}
                         {{ form_errors(registrationForm.adresse) }}
                 </div>
-                <div class="col-12">
-                        {{ form_label(registrationForm.ville) }}
-                        {{ form_widget(registrationForm.ville) }}
-                        {{ form_errors(registrationForm.ville) }}
-                </div>
-                <div class="col-12">
+                <div class="col-12 w-50">
                         {{ form_label(registrationForm.codePostal) }}
                         {{ form_widget(registrationForm.codePostal) }}
                         {{ form_errors(registrationForm.codePostal)}}
+                </div>
+                <div class="col-12 w-50">
+                        {{ form_label(registrationForm.ville) }}
+                        {{ form_widget(registrationForm.ville) }}
+                        {{ form_errors(registrationForm.ville) }}
                 </div>
                 <div class="col-12 m-5">
                         {{ form_label(registrationForm.agreeTerms) }}
@@ -67,7 +67,6 @@
                 </div>
             </div>
         </div>
-
         {{ form_end(registrationForm) }}
     </fieldset>
 {% endblock %}
